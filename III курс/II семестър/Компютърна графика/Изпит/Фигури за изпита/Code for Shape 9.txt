@@ -1,0 +1,81 @@
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+
+namespace Draw
+{
+    /// <summary>
+    /// Класът кръг е основен примитив, който е наследник на базовия Shape.
+    /// </summary>
+    public class Rhomb : Shape
+    {
+        #region Constructors
+
+        public Rhomb(RectangleF rect)
+            : base(rect)
+        {
+        }
+
+        public Rhomb(Circle shape)
+            : base(shape)
+        {
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Проверка за принадлежност на точка point към кръга.
+        /// </summary>
+        public override bool Contains(PointF point)
+        {
+            // Използваме формулата за разстоянието между две точки, за да проверим дали точката е вътре в кръга.
+            float centerX = Rectangle.X + Rectangle.Width / 2;
+            float centerY = Rectangle.Y + Rectangle.Height / 2;
+            float distance = (float)Math.Sqrt(Math.Pow(point.X - centerX, 2) + Math.Pow(point.Y - centerY, 2));
+
+            return distance <= Rectangle.Width / 2;
+        }
+
+        /// <summary>
+        /// Частта, визуализираща конкретния примитив.
+        /// </summary>
+        public override void DrawSelf(Graphics grfx)
+        {
+            base.DrawSelf(grfx);
+            grfx.Transform = TransformationMatrix;
+
+            PointF[] points = new PointF[4];
+            points[0] = new PointF(Rectangle.X + Rectangle.Width / 2, Rectangle.Y);
+            points[1] = new PointF(Rectangle.Right, Rectangle.Y + Rectangle.Height / 2);
+            points[2] = new PointF(Rectangle.X + Rectangle.Width / 2, Rectangle.Bottom);
+            points[3] = new PointF(Rectangle.X, Rectangle.Y + Rectangle.Height / 2);
+
+            grfx.FillPolygon(new SolidBrush(Color.FromArgb(Opacity, FillColor)), points);
+            grfx.DrawPolygon(new Pen(Color.FromArgb(Opacity, StrokeColor), StrokeWidth), points);
+
+
+            grfx.DrawLine(new Pen(Color.FromArgb(Opacity, StrokeColor), StrokeWidth),
+                          Rectangle.X, Rectangle.Y + Rectangle.Height / 2,
+                          Rectangle.X + Rectangle.Width, Rectangle.Y + Rectangle.Height / 2);
+            grfx.DrawLine(new Pen(Color.FromArgb(Opacity, StrokeColor), StrokeWidth),
+                         Rectangle.X + Rectangle.Width / 2, Rectangle.Y + Rectangle.Height / 2,
+                         Rectangle.X + Rectangle.Width / 2, Rectangle.Y + Rectangle.Height);
+
+        }
+    }
+}
+
+
+
+public void AddRandomRhomb()
+        {
+            Random rnd = new Random();
+            int x = rnd.Next(100, 1000);
+            int y = rnd.Next(100, 600);
+
+            Rhomb rhomb = new Rhomb(new Rectangle(x, y, 100, 100));
+            rhomb.FillColor = Color.White;
+
+            ShapeList.Add(rhomb);
+
+        }
