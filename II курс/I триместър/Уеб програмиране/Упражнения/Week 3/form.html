@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<head>
+  <meta charset = "utf-8">
+  <title>Формуляр</title>
+</head>
+
+<body>
+ <h1>Данни за студент</h1>
+ <form action = "#" method = "post" name = "student">
+
+  Име: <input type = "text" name = "stuName">
+  Фак. номер: <input type = "text" name = "fn"><br>
+  Е-поща: <input type = "email" name = "email"><br>
+  Парола: <input type = "password" name = "pw"><br><br>
+  Курс: <select name = "course">
+         <option value = "1">I</option>
+         <option value = "2">II</option>
+         <option value = "3">III</option>
+         <option value = "4">IV</option>
+        </select>
+  Специалност:
+        <input type = "text" name = "spec" list = "sp">
+        <datalist id = "sp">
+         <option value = "Информатика">
+         <option value = "СИ">
+         <option value = "СТД">
+        </datalist>
+      <br><br>
+   Пол: <input type = "radio" name = "sex" value = "мъж">мъж
+        <input type = "radio" name = "sex" value = "жена">жена
+     <br><br>
+   Владеене на чужде езици: <input type = "checkbox" name = "lng" value = "английски">английски
+                            <input type = "checkbox" name = "lng" value = "руски">руски
+                            <input type = "checkbox" name = "lng" value = "друг">друг
+                            <br><br>
+   Кратка автобиография: <br>
+                         <textarea name = "cv">...</textarea>
+                         <input type = "date" name = "dat" min "2021-10-13" value = "2021-10-13"><br>
+                         <input type = "reset" value = "Инициализиране">
+                         <input type = "submit" value = "Изпращане на данни">
+                         
+
+
+
+</form>
+</body>
+</html>

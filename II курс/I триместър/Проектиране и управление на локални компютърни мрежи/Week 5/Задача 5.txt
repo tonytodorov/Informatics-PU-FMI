@@ -1,0 +1,279 @@
+PC1> show ip
+
+NAME        : PC1[1]
+IP/MASK     : 0.0.0.0/0
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:00
+LPORT       : 10022
+RHOST:PORT  : 127.0.0.1:10023
+MTU:        : 1500
+
+PC1> ip 192.168.44.101/24
+Checking for duplicate address...
+PC1 : 192.168.44.101 255.255.255.0
+
+PC1> show ip
+
+NAME        : PC1[1]
+IP/MASK     : 192.168.44.101/24
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:00
+LPORT       : 10022
+RHOST:PORT  : 127.0.0.1:10023
+MTU:        : 1500
+
+PC1> ping 192.168.44.204
+84 bytes from 192.168.44.204 icmp_seq=1 ttl=64 time=0.906 ms
+84 bytes from 192.168.44.204 icmp_seq=2 ttl=64 time=2.401 ms
+84 bytes from 192.168.44.204 icmp_seq=3 ttl=64 time=1.177 ms
+84 bytes from 192.168.44.204 icmp_seq=4 ttl=64 time=0.832 ms
+84 bytes from 192.168.44.204 icmp_seq=5 ttl=64 time=1.363 ms
+
+PC1> ping 192.168.44.204
+host (192.168.44.204) not reachable
+
+PC1> ping 192.168.44.103
+84 bytes from 192.168.44.103 icmp_seq=1 ttl=64 time=1.071 ms
+84 bytes from 192.168.44.103 icmp_seq=2 ttl=64 time=1.555 ms
+84 bytes from 192.168.44.103 icmp_seq=3 ttl=64 time=1.301 ms
+84 bytes from 192.168.44.103 icmp_seq=4 ttl=64 time=2.186 ms
+84 bytes from 192.168.44.103 icmp_seq=5 ttl=64 time=1.283 ms
+
+PC1>
+----------------------
+
+PC2> ip 192.168.44.202/24
+Checking for duplicate address...
+PC1 : 192.168.44.202 255.255.255.0
+
+PC2> show ip
+
+NAME        : PC2[1]
+IP/MASK     : 192.168.44.202/24
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:01
+LPORT       : 10024
+RHOST:PORT  : 127.0.0.1:10025
+MTU:        : 1500
+
+PC2>
+
+----------------------
+PC3> ip 192.168.44.103/24
+Checking for duplicate address...
+PC1 : 192.168.44.103 255.255.255.0
+
+PC3> show ip
+
+NAME        : PC3[1]
+IP/MASK     : 192.168.44.103/24
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:02
+LPORT       : 10026
+RHOST:PORT  : 127.0.0.1:10027
+MTU:        : 1500
+
+PC3>
+--------------------
+PC4> ip 192.168.44.204/24
+Checking for duplicate address...
+PC1 : 192.168.44.204 255.255.255.0
+
+PC4> show ip
+
+NAME        : PC4[1]
+IP/MASK     : 192.168.44.204/24
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:03
+LPORT       : 10028
+RHOST:PORT  : 127.0.0.1:10029
+MTU:        : 1500
+
+PC4>
+----------------------------------------------
+ESW1#show vlan-switch brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa1/0, Fa1/1, Fa1/2, Fa1/3
+                                                Fa1/4, Fa1/5, Fa1/6, Fa1/7
+                                                Fa1/8, Fa1/9, Fa1/10, Fa1/11
+                                                Fa1/12, Fa1/13, Fa1/14, Fa1/15
+1002 fddi-default                     active
+1003 token-ring-default               active
+1004 fddinet-default                  active
+1005 trnet-default                    active
+ESW1#vlan data
+ESW1(vlan)#vlan 100 name vlan100
+VLAN 100 added:
+    Name: vlan100
+ESW1(vlan)#vlan 200 name vlan200
+VLAN 200 added:
+    Name: vlan200
+ESW1(vlan)#exit
+APPLY completed.
+Exiting....
+ESW1#show vlan-switch brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa1/0, Fa1/1, Fa1/2, Fa1/3
+                                                Fa1/4, Fa1/5, Fa1/6, Fa1/7
+                                                Fa1/8, Fa1/9, Fa1/10, Fa1/11
+                                                Fa1/12, Fa1/13, Fa1/14, Fa1/15
+100  vlan100                          active
+200  vlan200                          active
+1002 fddi-default                     active
+1003 token-ring-default               active
+1004 fddinet-default                  active
+1005 trnet-default                    active
+ESW1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+ESW1(config)#int f1/1
+ESW1(config-if)#switchport mode access
+ESW1(config-if)#switchport access vlan 100
+ESW1(config-if)#exit
+ESW1(config)#int f1/2
+ESW1(config-if)#switchport mode access
+ESW1(config-if)#switchport access vlan 200
+ESW1(config-if)#exit
+ESW1(config)#exit
+ESW1#
+*Mar  1 00:15:14.091: %SYS-5-CONFIG_I: Configured from console by console
+ESW1#show vlan-switch brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa1/0, Fa1/3, Fa1/4, Fa1/5
+                                                Fa1/6, Fa1/7, Fa1/8, Fa1/9
+                                                Fa1/10, Fa1/11, Fa1/12, Fa1/13
+                                                Fa1/14, Fa1/15
+100  vlan100                          active    Fa1/1
+200  vlan200                          active    Fa1/2
+1002 fddi-default                     active
+1003 token-ring-default               active
+1004 fddinet-default                  active
+1005 trnet-default                    active
+ESW1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+ESW1(config)#int f1/15
+ESW1(config-if)#switchport mode trunk
+ESW1(config-if)#
+*Mar  1 00:21:16.459: %DTP-5-TRUNKPORTON: Port Fa1/15 has become dot1q trunk
+ESW1(config-if)#exit
+ESW1(config)#exit
+ESW1#
+*Mar  1 00:22:26.479: %SYS-5-CONFIG_I: Configured from console by console
+ESW1#show vlan-switch brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa1/0, Fa1/3, Fa1/4, Fa1/5
+                                                Fa1/6, Fa1/7, Fa1/8, Fa1/9
+                                                Fa1/10, Fa1/11, Fa1/12, Fa1/13
+                                                Fa1/14
+100  vlan100                          active    Fa1/1
+200  vlan200                          active    Fa1/2
+1002 fddi-default                     active
+1003 token-ring-default               active
+1004 fddinet-default                  active
+1005 trnet-default                    active
+ESW1#
+--------------------------------------------
+ESW2#show vlan-switch brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa1/0, Fa1/1, Fa1/2, Fa1/3
+                                                Fa1/4, Fa1/5, Fa1/6, Fa1/7
+                                                Fa1/8, Fa1/9, Fa1/10, Fa1/11
+                                                Fa1/12, Fa1/13, Fa1/14, Fa1/15
+1002 fddi-default                     active
+1003 token-ring-default               active
+1004 fddinet-default                  active
+1005 trnet-default                    active
+ESW2#vlan data
+ESW2(vlan)#vlan 100 name vlan100
+VLAN 100 added:
+    Name: vlan100
+ESW2(vlan)#vlan 200 name vlan200
+VLAN 200 added:
+    Name: vlan200
+ESW2(vlan)#exit
+APPLY completed.
+Exiting....
+ESW2#show vlan-switch brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa1/0, Fa1/1, Fa1/2, Fa1/3
+                                                Fa1/4, Fa1/5, Fa1/6, Fa1/7
+                                                Fa1/8, Fa1/9, Fa1/10, Fa1/11
+                                                Fa1/12, Fa1/13, Fa1/14, Fa1/15
+100  vlan100                          active
+200  vlan200                          active
+1002 fddi-default                     active
+1003 token-ring-default               active
+1004 fddinet-default                  active
+1005 trnet-default                    active
+ESW2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+ESW2(config)#int f1/1
+ESW2(config-if)#switchport mode access
+ESW2(config-if)#switchport access vlan 100
+ESW2(config-if)#exit
+ESW2(config)#int f1/2
+ESW2(config-if)#switchport mode access
+ESW2(config-if)#switchport access vlan 200
+ESW2(config-if)#exit
+ESW2(config)#exit
+ESW2#
+*Mar  1 00:17:21.291: %SYS-5-CONFIG_I: Configured from console by console
+ESW2#show vlan-switch brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa1/0, Fa1/3, Fa1/4, Fa1/5
+                                                Fa1/6, Fa1/7, Fa1/8, Fa1/9
+                                                Fa1/10, Fa1/11, Fa1/12, Fa1/13
+                                                Fa1/14, Fa1/15
+100  vlan100                          active    Fa1/1
+200  vlan200                          active    Fa1/2
+1002 fddi-default                     active
+1003 token-ring-default               active
+1004 fddinet-default                  active
+1005 trnet-default                    active
+ESW2#
+*Mar  1 00:21:17.987: %SPANTREE-7-RECV_1Q_NON_TRUNK: Received 802.1Q BPDU on non trunk FastEthernet1/15 VLAN1.
+*Mar  1 00:21:17.987: %SPANTREE-7-BLOCK_PORT_TYPE: Blocking FastEthernet1/15 on VLAN1. Inconsistent port type.PVST+: restarted the forward delay timer for FastEthernet1/15
+
+ESW2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+ESW2(config)#int f1/15
+ESW2(config-if)#switchport mode trunk
+ESW2(config-if)#
+*Mar  1 00:23:41.351: %DTP-5-TRUNKPORTON: Port Fa1/15 has become dot1q trunk
+ESW2(config-if)#exit
+ESW2(config)#exit
+ESW2#show vlan-switch brief
+*Mar  1 00:24:03.007: %SYS-5-CONFIG_I: Configured from console by console
+ESW2#show vlan-switch brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa1/0, Fa1/3, Fa1/4, Fa1/5
+                                                Fa1/6, Fa1/7, Fa1/8, Fa1/9
+                                                Fa1/10, Fa1/11, Fa1/12, Fa1/13
+                                                Fa1/14
+100  vlan100                          active    Fa1/1
+200  vlan200                          active    Fa1/2
+1002 fddi-default                     active
+1003 token-ring-default               active
+1004 fddinet-default                  active
+1005 trnet-default                    active
+ESW2#

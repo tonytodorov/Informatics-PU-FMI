@@ -1,0 +1,46 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Задача 1</title>
+<link rel="stylesheet" href="css1.css">
+
+<script>
+myFunction = function() {
+    var first = document.getElementById("firstname").value;
+    var middle = document.getElementById("middlename").value;
+    var second = document.getElementById("lastname").value;
+    
+    document.getElementById("here").innerHTML = second+" "+first.charAt(first)+".&nbsp"+middle.charAt(first)+".";
+}
+</script>
+
+</head>
+
+<body>
+<div id="top">
+<h1 align="center">HTML & CSS</h1></div>
+
+<div id="left">
+<p align = "center">
+<a href = "Задача 1.htm">Страница 1</a><br> 
+<a href = "Задача 2.htm">Страница 2</a><br> 
+</p></div>
+
+<div id="content"><br><br>
+Име:<input type="text" name="firstname" id='firstname'>&nbsp&nbsp&nbsp
+Презиме:<input type="text" name="middlename" id='middlename'>&nbsp&nbsp&nbsp
+Фамилия:<input type="text" name="lastname" id='lastname'><br>
+<input type="button" value="Бутон" onclick="myFunction()"><br>
+Резултат:<div id="here"></div>     
+</div>
+
+<div id="footer">
+<h3 align="center">Тони Тодоров 2001261067</h3></div>
+</div>
+
+<script src="script2.js"></script>
+
+</body>
+</html>

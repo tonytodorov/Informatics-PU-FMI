@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>  
+<head>
+  
+<style>
+form{width: 350px; margin:auto; border:1px solid #666; padding:0 20px 20px}
+p{border-bottom: 1px dotted #333; padding:5px;}
+p input, p span{vertical-align:middle}
+h4 { background-color: #cccccc; padding: 5px; color:#333333; font: normal normal 18px Impact, fantasy}
+span { font: normal normal 14px Helvetica, sans-serif; }
+h4, form {    
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;}
+</style>
+
+</head>
+
+<body>
+<script src="jsfile.js"></script>
+<form name="question_form" id="question_form" method="POST" action='#'>
+
+<div id="question_1"> <H4>Кои са трите национални парка в България?</H4></div>
+<p><input type="radio" name="question_1" class="wrong" value="a" />
+<span>Пирин, Стара планина, Рилски езера</span> </p>
+<p><input type="radio" name="question_1" class="wrong" value="b" />
+<span>Централен Балкан, Рила, Пирин</span></p>
+<p><input type="radio" name="question_1" class="answer" value="c" />
+<span>Централен Балкан, Странджа, Рила</span></p>
+<p><input type="radio" name="question_1" class="wrong" value="d" />
+<span>Рила, Пирин, Витоша</span></p>
+      
+<div id="question_2"> <H4>Кой е последният изригнал вулкан на българска територия?</H4></div>
+<p><input type="radio" name="question_2" class="wrong" value="e" />
+<span>Възвишението Кожух</span></p>
+<p><input type="radio" name="question_2" class="wrong" value="f" />
+<span>Брезнишката котловина</span></p>
+<p><input type="radio" name="question_2" class="answer" value="g" />
+<span>Могила Оструша</span></p>
+<p><input type="radio" name="question_2" class="wrong" value="h" />
+<span>Джендем тепе</span></p>
+
+<div id="question_3"> <H4>В кое селище е измерена най-ниската температура у нас?</H4></div>
+<p><input type="radio" name="question_3" class="wrong" value="e" />
+<span>Кнежа</span> </p>
+<p><input type="radio" name="question_3" class="wrong" value="f" />
+<span>Смолян</span></p>
+<p><input type="radio" name="question_3" class="answer" value="g" />
+<span>Трън</span></p>
+<p><input type="radio" name="question_3" class="wrong" value="h" />
+<span>Априлци</span></p>
+      
+<input type="submit" name="Изпращане" onclick="checkQuestions();return false;" value="Изпращане"/>
+
+</form>  
+</body>
+</html>

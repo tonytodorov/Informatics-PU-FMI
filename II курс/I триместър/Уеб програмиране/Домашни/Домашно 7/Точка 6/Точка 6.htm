@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<form name="quiz" method="post" name="buttons" id="quiz" onsubmit="return false">
+
+<div class="question">Кои от следните числа са прости?</div></li>
+<input id="answer" type="checkbox" name="group1" value="correct">2<br>
+<input id="answer" type="checkbox" name="group1" value="correct">31<br>
+<input id="answer" type="checkbox" name="group1" value="wrong">-291<br>
+<input id="answer" type="checkbox" name="group1" value="wrong">√27<hr>
+
+<div class="question">За правоъгълният триъгълник е вярно, че:</div></li>
+<input id="answer" type="checkbox" name="group2" value="correct">Лицето на правоъгълен триъгълник е равно на 1/2 от произведението на дължините на катетите.<br>
+<input id="answer" type="checkbox" name="group2" value="correct">Най-дългата страна в триъгълника е тази, която лежи срещу правия ъгъл и се нарича хипотенуза.<br>
+<input id="answer" type="checkbox" name="group2" value="wrong">Дължината на медианата към хипотенузата е равна на 1/3 от дължината на хипотенузата.<br>
+<input id="answer" type="checkbox" name="group2" value="correct">Лицето на правоъгълен триъгълник е равно на 1/2 от произведението на дължините на катетите.<hr>
+
+<div class="question">На кои снимки са изобразени диви животни?</div></li>
+<p>Снимка 1:</p>
+<img src = "1.jpg" height = "350px"><br>
+<p>Снимка 2:</p>
+<img src = "2.jpg" width = "385px" height = "350px"><br>
+<p>Снимка 3:</p>
+<img src = "3.jpg" width = "390px" height = "350px"><br>
+<input id="answer" type="checkbox" name="group3" value="correct">Снимка 1<br>
+<input id="answer" type="checkbox" name="group3" value="correct">Снимка 2<br>
+<input id="answer" type="checkbox" name="group3" value="wrong" >Снимка 3<hr>
+
+<button class="submit" onclick="return handleClick();" type="submit">Изпращане</button>
+</form>
+
+<script>
+function handleClick(){         
+   var amountCorrect = 0;          
+   for(var i = 1; i <= 45; i++) {
+   var radios = document.getElementsByName('group'+i);
+   for(var j = 0; j < radios.length; j++) {
+       var radio = radios[j];
+         if(radio.value == "correct" && radio.checked) {
+              amountCorrect++;
+          }
+       }
+    }                   
+     alert("Верни отговори: " + amountCorrect);
+}
+</script>
+</body>
+</html>

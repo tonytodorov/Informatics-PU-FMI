@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div style="text-align:center"> 
+  <button onclick="playPause()">Play/Pause</button> 
+  <button onclick="makeSmall()">Small</button>
+  <button onclick="makeNormal()">Normal</button>
+  <button onclick="makeBig()">Big</button><br> 
+<video id="video1" width="300">
+  <source src="Peaky Blinders.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video></div> 
+<script> 
+var myVideo=document.getElementById("video1"); 
+function playPause(){ 
+if (myVideo.paused) 
+  myVideo.play(); 
+else 
+  myVideo.pause(); 
+} 
+
+function makeSmall(){ 
+myVideo.width=400; 
+} 
+
+function makeNormal(){ 
+myVideo.width=700; 
+} 
+
+function makeBig(){ 
+myVideo.width=1200; 
+} 
+
+</script> 
+</body> 
+</html>

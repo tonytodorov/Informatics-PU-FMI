@@ -1,0 +1,165 @@
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#int f0/0
+R1(config-if)#ip address 10.1.1.1 255.255.255.0
+R1(config-if)#no shut
+R1(config-if)#
+*Mar  1 00:01:03.091: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up
+*Mar  1 00:01:04.091: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+R1(config-if)#exit
+R1(config)#int f0/1
+R1(config-if)#ip address 198.51.100.1 255.255.255.252
+R1(config-if)#no shut
+R1(config-if)#
+*Mar  1 00:02:04.547: %LINK-3-UPDOWN: Interface FastEthernet0/1, changed state to up
+*Mar  1 00:02:05.547: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+R1(config-if)#exit
+R1(config)#int f0/0
+R1(config-if)#ip nat inside
+R1(config-if)#exit
+*Mar  1 00:12:46.859: %LINEPROTO-5-UPDOWN: Line protocol on Interface NVI0, changed state to up
+R1(config-if)#exit
+R1(config)#int f0/1
+R1(config-if)#ip nat outside
+R1(config-if)#exit
+R1(config)#access-list 1 permit 10.1.1.0 0.0.0.255
+R1(config)#ip nat inside source list 1 interface f0/1 overload
+R1(config)#exit
+R1#
+*Mar  1 00:17:39.891: %SYS-5-CONFIG_I: Configured from console by console
+R1#wr
+Building configuration...
+[OK]
+R1#show ip nat trans
+
+R1#show ip nat trans
+Pro Inside global      Inside local       Outside local      Outside global
+icmp 198.51.100.1:19358 10.1.1.3:19358    198.51.100.2:19358 198.51.100.2:19358
+icmp 198.51.100.1:19614 10.1.1.3:19614    198.51.100.2:19614 198.51.100.2:19614
+icmp 198.51.100.1:19870 10.1.1.3:19870    198.51.100.2:19870 198.51.100.2:19870
+R1#show ip nat trans
+Pro Inside global      Inside local       Outside local      Outside global
+icmp 198.51.100.1:19358 10.1.1.3:19358    198.51.100.2:19358 198.51.100.2:19358
+icmp 198.51.100.1:19614 10.1.1.3:19614    198.51.100.2:19614 198.51.100.2:19614
+icmp 198.51.100.1:19870 10.1.1.3:19870    198.51.100.2:19870 198.51.100.2:19870
+icmp 198.51.100.1:20126 10.1.1.3:20126    198.51.100.2:20126 198.51.100.2:20126
+icmp 198.51.100.1:20382 10.1.1.3:20382    198.51.100.2:20382 198.51.100.2:20382
+R1#show ip nat trans
+Pro Inside global      Inside local       Outside local      Outside global
+icmp 198.51.100.1:29598 10.1.1.2:29598    198.51.100.2:29598 198.51.100.2:29598
+icmp 198.51.100.1:29854 10.1.1.2:29854    198.51.100.2:29854 198.51.100.2:29854
+icmp 198.51.100.1:30110 10.1.1.2:30110    198.51.100.2:30110 198.51.100.2:30110
+icmp 198.51.100.1:19358 10.1.1.3:19358    198.51.100.2:19358 198.51.100.2:19358
+icmp 198.51.100.1:19614 10.1.1.3:19614    198.51.100.2:19614 198.51.100.2:19614
+icmp 198.51.100.1:19870 10.1.1.3:19870    198.51.100.2:19870 198.51.100.2:19870
+icmp 198.51.100.1:20126 10.1.1.3:20126    198.51.100.2:20126 198.51.100.2:20126
+icmp 198.51.100.1:20382 10.1.1.3:20382    198.51.100.2:20382 198.51.100.2:20382
+R1#show ip nat trans
+Pro Inside global      Inside local       Outside local      Outside global
+icmp 198.51.100.1:29598 10.1.1.2:29598    198.51.100.2:29598 198.51.100.2:29598
+icmp 198.51.100.1:29854 10.1.1.2:29854    198.51.100.2:29854 198.51.100.2:29854
+icmp 198.51.100.1:30110 10.1.1.2:30110    198.51.100.2:30110 198.51.100.2:30110
+icmp 198.51.100.1:30366 10.1.1.2:30366    198.51.100.2:30366 198.51.100.2:30366
+icmp 198.51.100.1:30622 10.1.1.2:30622    198.51.100.2:30622 198.51.100.2:30622
+R1#show ip nat trans
+Pro Inside global      Inside local       Outside local      Outside global
+icmp 198.51.100.1:29598 10.1.1.2:29598    198.51.100.2:29598 198.51.100.2:29598
+icmp 198.51.100.1:29854 10.1.1.2:29854    198.51.100.2:29854 198.51.100.2:29854
+icmp 198.51.100.1:30110 10.1.1.2:30110    198.51.100.2:30110 198.51.100.2:30110
+icmp 198.51.100.1:30366 10.1.1.2:30366    198.51.100.2:30366 198.51.100.2:30366
+icmp 198.51.100.1:30622 10.1.1.2:30622    198.51.100.2:30622 198.51.100.2:30622
+R1#
+----------------------------------------------------------------------------------------
+СЪРВЪР> ip 198.51.100.2/30 198.51.100.1
+Checking for duplicate address...
+PC1 : 198.51.100.2 255.255.255.252 gateway 198.51.100.1
+
+СЪРВЪР> show ip
+
+NAME        : СЪРВЪР[1]
+IP/MASK     : 198.51.100.2/30
+GATEWAY     : 198.51.100.1
+DNS         :
+MAC         : 00:50:79:66:68:02
+LPORT       : 10016
+RHOST:PORT  : 127.0.0.1:10017
+MTU:        : 1500
+
+СЪРВЪР>
+-------------------------------------------------------------------------------------------
+PC1> ip 10.1.1.2/24 10.1.1.1
+Checking for duplicate address...
+PC1 : 10.1.1.2 255.255.255.0 gateway 10.1.1.1
+
+PC1> show ip
+
+NAME        : PC1[1]
+IP/MASK     : 10.1.1.2/24
+GATEWAY     : 10.1.1.1
+DNS         :
+MAC         : 00:50:79:66:68:00
+LPORT       : 10012
+RHOST:PORT  : 127.0.0.1:10013
+MTU:        : 1500
+
+PC1> ping 198.51.100.1
+84 bytes from 198.51.100.1 icmp_seq=1 ttl=255 time=30.203 ms
+84 bytes from 198.51.100.1 icmp_seq=2 ttl=255 time=30.334 ms
+84 bytes from 198.51.100.1 icmp_seq=3 ttl=255 time=30.398 ms
+84 bytes from 198.51.100.1 icmp_seq=4 ttl=255 time=30.383 ms
+84 bytes from 198.51.100.1 icmp_seq=5 ttl=255 time=30.463 ms
+
+PC1> ping 198.51.100.2
+84 bytes from 198.51.100.2 icmp_seq=1 ttl=63 time=45.571 ms
+84 bytes from 198.51.100.2 icmp_seq=2 ttl=63 time=45.352 ms
+84 bytes from 198.51.100.2 icmp_seq=3 ttl=63 time=60.290 ms
+84 bytes from 198.51.100.2 icmp_seq=4 ttl=63 time=60.540 ms
+84 bytes from 198.51.100.2 icmp_seq=5 ttl=63 time=45.175 ms
+
+PC1> ping 10.1.1.3
+84 bytes from 10.1.1.3 icmp_seq=1 ttl=64 time=0.771 ms
+84 bytes from 10.1.1.3 icmp_seq=2 ttl=64 time=0.586 ms
+84 bytes from 10.1.1.3 icmp_seq=3 ttl=64 time=0.992 ms
+84 bytes from 10.1.1.3 icmp_seq=4 ttl=64 time=1.302 ms
+84 bytes from 10.1.1.3 icmp_seq=5 ttl=64 time=0.656 ms
+
+PC1>
+------------------------------------------------------------------
+PC2> ip 10.1.1.3/24 10.1.1.1
+Checking for duplicate address...
+PC1 : 10.1.1.3 255.255.255.0 gateway 10.1.1.1
+
+PC2> show ip
+
+NAME        : PC2[1]
+IP/MASK     : 10.1.1.3/24
+GATEWAY     : 10.1.1.1
+DNS         :
+MAC         : 00:50:79:66:68:01
+LPORT       : 10014
+RHOST:PORT  : 127.0.0.1:10015
+MTU:        : 1500
+
+PC2> ping 198.51.100.2
+198.51.100.2 icmp_seq=1 timeout
+84 bytes from 198.51.100.2 icmp_seq=2 ttl=63 time=60.439 ms
+84 bytes from 198.51.100.2 icmp_seq=3 ttl=63 time=60.635 ms
+84 bytes from 198.51.100.2 icmp_seq=4 ttl=63 time=60.171 ms
+84 bytes from 198.51.100.2 icmp_seq=5 ttl=63 time=45.365 ms
+
+PC2> ping 198.51.100.2
+84 bytes from 198.51.100.2 icmp_seq=1 ttl=63 time=60.437 ms
+84 bytes from 198.51.100.2 icmp_seq=2 ttl=63 time=45.452 ms
+84 bytes from 198.51.100.2 icmp_seq=3 ttl=63 time=60.359 ms
+84 bytes from 198.51.100.2 icmp_seq=4 ttl=63 time=60.302 ms
+84 bytes from 198.51.100.2 icmp_seq=5 ttl=63 time=60.853 ms
+
+PC2> ping 198.51.100.1
+84 bytes from 198.51.100.1 icmp_seq=1 ttl=255 time=30.444 ms
+84 bytes from 198.51.100.1 icmp_seq=2 ttl=255 time=30.408 ms
+84 bytes from 198.51.100.1 icmp_seq=3 ttl=255 time=30.383 ms
+84 bytes from 198.51.100.1 icmp_seq=4 ttl=255 time=30.360 ms
+84 bytes from 198.51.100.1 icmp_seq=5 ttl=255 time=30.386 ms
+
+PC2>
+--------------------------------------------------------------------

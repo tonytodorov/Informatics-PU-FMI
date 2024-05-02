@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type = "text/JavaScript">
+pics = new Array();
+pics[0]=new Image();
+pics[0].src="1.jpg";
+pics[1]=new Image();
+pics[1].src="2.jpg"; 
+pics[2]=new Image();
+pics[2].src="3.jpg"; 
+current = 0;
+function nextPicture()
+{
+if(++current>=pics.length)current = 0;
+document.myPic.src = pics[current].src;
+}
+
+</script>
+</head>
+
+<body>
+
+<div id = "top">
+<h1 align = "center">HTML & JavaScript</h1>
+</div>
+
+<div id = "content">
+<p align = "center"><img src = "1.jpg" width = "480px"
+name = "myPic" onClick = "nextPicture()">
+</div></p>
+
+<div id = "bottom">
+<p align = "center">Уеб програмиране с <b>HTML & JavaScript</b></p>
+</div>
+
+</body>
+</html> 

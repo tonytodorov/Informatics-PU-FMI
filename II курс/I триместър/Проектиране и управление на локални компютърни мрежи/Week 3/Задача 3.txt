@@ -1,0 +1,138 @@
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#int f0/0
+R1(config-if)#ip add 192.168.100.1 255.255.255.0
+R1(config-if)#no shut
+R1(config-if)#
+*Mar  1 00:17:04.075: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up
+*Mar  1 00:17:05.075: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+R1(config-if)#exit
+R1(config)#int f0/1
+R1(config-if)#ip add 192.168.200.1 255.255.255.0
+R1(config-if)#no shut
+R1(config-if)#
+*Mar  1 00:18:59.175: %LINK-3-UPDOWN: Interface FastEthernet0/1, changed state to up
+*Mar  1 00:19:00.175: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+R1(config-if)#exit
+R1(config)#ip dhcp pool p100
+R1(dhcp-config)#network 192.168.100.0 255.255.255.0
+R1(dhcp-config)#default-router 192.168.100.1
+R1(dhcp-config)#dns-server 192.168.100.1
+R1(dhcp-config)#lease 1 1 15
+R1(dhcp-config)#domain-name test.com
+R1(dhcp-config)#exit
+R1(config)#ip dhcp pool p200
+R1(dhcp-config)#network 192.168.200.0 255.255.255.0
+R1(dhcp-config)#default-router 192.168.200.1
+R1(dhcp-config)#dns-server 192.168.200.1
+R1(dhcp-config)#lease 1 2 30
+R1(dhcp-config)#domain-name test1.com
+R1(dhcp-config)#exit
+R1(config)#ip dhcp excluded-address 192.168.100.1 192.168.100.100
+R1(config)#ip dhcp excluded-address 192.168.200.1 192.168.200.100
+R1(config)#exit
+R1#
+*Mar  1 00:34:01.611: %SYS-5-CONFIG_I: Configured from console by console
+R1#wr
+Building configuration...
+[OK]
+R1#
+-------------------------------------------------------------
+
+PC1> ip dhcp
+DDORA IP 192.168.100.101/24 GW 192.168.100.1
+
+PC1> show ip
+
+NAME        : PC1[1]
+IP/MASK     : 192.168.100.101/24
+GATEWAY     : 192.168.100.1
+DNS         : 192.168.100.1
+DHCP SERVER : 192.168.100.1
+DHCP LEASE  : 90897, 90900/45450/79537
+DOMAIN NAME : test.com
+MAC         : 00:50:79:66:68:00
+LPORT       : 10016
+RHOST:PORT  : 127.0.0.1:10017
+MTU:        : 1500
+
+PC1>
+
+------------------------------------------------------------
+
+PC2> ip dhcp
+DDORA IP 192.168.100.102/24 GW 192.168.100.1
+
+PC2> show ip
+
+NAME        : PC2[1]
+IP/MASK     : 192.168.100.102/24
+GATEWAY     : 192.168.100.1
+DNS         : 192.168.100.1
+DHCP SERVER : 192.168.100.1
+DHCP LEASE  : 90894, 90900/45450/79537
+DOMAIN NAME : test.com
+MAC         : 00:50:79:66:68:01
+LPORT       : 10018
+RHOST:PORT  : 127.0.0.1:10019
+MTU:        : 1500
+
+PC2>
+
+--------------------------------------------------------------
+
+PC3> ip dhcp
+DDORA IP 192.168.200.101/24 GW 192.168.200.1
+
+PC3> show ip
+
+NAME        : PC3[1]
+IP/MASK     : 192.168.200.101/24
+GATEWAY     : 192.168.200.1
+DNS         : 192.168.200.1
+DHCP SERVER : 192.168.200.1
+DHCP LEASE  : 95397, 95400/47700/83475
+DOMAIN NAME : test1.com
+MAC         : 00:50:79:66:68:02
+LPORT       : 10020
+RHOST:PORT  : 127.0.0.1:10021
+MTU:        : 1500
+
+PC3>
+
+-------------------------------------------------------------
+
+PC4> ip dhcp
+DDORA IP 192.168.200.102/24 GW 192.168.200.1
+
+PC4> show ip
+
+NAME        : PC4[1]
+IP/MASK     : 192.168.200.102/24
+GATEWAY     : 192.168.200.1
+DNS         : 192.168.200.1
+DHCP SERVER : 192.168.200.1
+DHCP LEASE  : 95392, 95400/47700/83475
+DOMAIN NAME : test1.com
+MAC         : 00:50:79:66:68:03
+LPORT       : 10022
+RHOST:PORT  : 127.0.0.1:10023
+MTU:        : 1500
+
+PC4> ping 192.168.100.101
+192.168.100.101 icmp_seq=1 timeout
+192.168.100.101 icmp_seq=2 timeout
+84 bytes from 192.168.100.101 icmp_seq=3 ttl=63 time=60.375 ms
+84 bytes from 192.168.100.101 icmp_seq=4 ttl=63 time=60.336 ms
+84 bytes from 192.168.100.101 icmp_seq=5 ttl=63 time=60.286 ms
+
+PC4> ping 192.168.100.102
+192.168.100.102 icmp_seq=1 timeout
+192.168.100.102 icmp_seq=2 timeout
+84 bytes from 192.168.100.102 icmp_seq=3 ttl=63 time=45.404 ms
+84 bytes from 192.168.100.102 icmp_seq=4 ttl=63 time=60.266 ms
+84 bytes from 192.168.100.102 icmp_seq=5 ttl=63 time=60.829 ms
+
+PC4>
+
+--------------------------------------------------------------

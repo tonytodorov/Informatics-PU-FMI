@@ -1,0 +1,231 @@
+PC1> show ip
+
+NAME        : PC1[1]
+IP/MASK     : 0.0.0.0/0
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:00
+LPORT       : 10004
+RHOST:PORT  : 127.0.0.1:10005
+MTU:        : 1500
+
+PC1> ip 192.168.6.10 255.255.255.0 192.168.6.1
+Checking for duplicate address...
+PC1 : 192.168.6.10 255.255.255.0 gateway 192.168.6.1
+
+PC1> show ip
+
+NAME        : PC1[1]
+IP/MASK     : 192.168.6.10/24
+GATEWAY     : 192.168.6.1
+DNS         :
+MAC         : 00:50:79:66:68:00
+LPORT       : 10004
+RHOST:PORT  : 127.0.0.1:10005
+MTU:        : 1500
+
+PC1> ping 192.168.6.10
+192.168.6.10 icmp_seq=1 ttl=64 time=0.001 ms
+192.168.6.10 icmp_seq=2 ttl=64 time=0.001 ms
+192.168.6.10 icmp_seq=3 ttl=64 time=0.001 ms
+192.168.6.10 icmp_seq=4 ttl=64 time=0.001 ms
+192.168.6.10 icmp_seq=5 ttl=64 time=0.001 ms
+
+PC1> ping 192.168.6.31
+84 bytes from 192.168.6.31 icmp_seq=1 ttl=64 time=0.846 ms
+84 bytes from 192.168.6.31 icmp_seq=2 ttl=64 time=0.839 ms
+84 bytes from 192.168.6.31 icmp_seq=3 ttl=64 time=0.997 ms
+84 bytes from 192.168.6.31 icmp_seq=4 ttl=64 time=1.368 ms
+84 bytes from 192.168.6.31 icmp_seq=5 ttl=64 time=1.284 ms
+
+PC1>
+
+----------------------------------------------------------
+
+PC2> show ip
+
+NAME        : PC2[1]
+IP/MASK     : 0.0.0.0/0
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:01
+LPORT       : 10000
+RHOST:PORT  : 127.0.0.1:10001
+MTU:        : 1500
+
+PC2> ip 192.168.6.11 255.255.255.0 192.168.6.1
+Checking for duplicate address...
+PC1 : 192.168.6.11 255.255.255.0 gateway 192.168.6.1
+
+PC2> show ip
+
+NAME        : PC2[1]
+IP/MASK     : 192.168.6.11/24
+GATEWAY     : 192.168.6.1
+DNS         :
+MAC         : 00:50:79:66:68:01
+LPORT       : 10000
+RHOST:PORT  : 127.0.0.1:10001
+MTU:        : 1500
+
+PC2> ping 192.168.6.32
+84 bytes from 192.168.6.32 icmp_seq=1 ttl=64 time=0.879 ms
+84 bytes from 192.168.6.32 icmp_seq=2 ttl=64 time=0.924 ms
+84 bytes from 192.168.6.32 icmp_seq=3 ttl=64 time=1.571 ms
+84 bytes from 192.168.6.32 icmp_seq=4 ttl=64 time=0.974 ms
+84 bytes from 192.168.6.32 icmp_seq=5 ttl=64 time=0.798 ms
+
+PC2>
+
+----------------------------------------------------------
+
+PC3> show ip
+
+NAME        : PC3[1]
+IP/MASK     : 0.0.0.0/0
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:02
+LPORT       : 10002
+RHOST:PORT  : 127.0.0.1:10003
+MTU:        : 1500
+
+PC3> ip 192.168.6.21 255.255.255.0 192.168.6.1
+Checking for duplicate address...
+PC1 : 192.168.6.21 255.255.255.0 gateway 192.168.6.1
+
+PC3> show ip
+
+NAME        : PC3[1]
+IP/MASK     : 192.168.6.21/24
+GATEWAY     : 192.168.6.1
+DNS         :
+MAC         : 00:50:79:66:68:02
+LPORT       : 10002
+RHOST:PORT  : 127.0.0.1:10003
+MTU:        : 1500
+
+PC3> ping 192.168.6.22
+84 bytes from 192.168.6.22 icmp_seq=1 ttl=64 time=0.995 ms
+84 bytes from 192.168.6.22 icmp_seq=2 ttl=64 time=0.708 ms
+84 bytes from 192.168.6.22 icmp_seq=3 ttl=64 time=0.615 ms
+
+PC3>
+
+-----------------------------------------------------------
+
+PC4> show ip
+
+NAME        : PC4[1]
+IP/MASK     : 0.0.0.0/0
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:03
+LPORT       : 10006
+RHOST:PORT  : 127.0.0.1:10007
+MTU:        : 1500
+
+PC4> ip 192.168.6.22/24 192.168.6.1
+Checking for duplicate address...
+PC1 : 192.168.6.22 255.255.255.0 gateway 192.168.6.1
+
+PC4> show ip
+
+NAME        : PC4[1]
+IP/MASK     : 192.168.6.22/24
+GATEWAY     : 192.168.6.1
+DNS         :
+MAC         : 00:50:79:66:68:03
+LPORT       : 10006
+RHOST:PORT  : 127.0.0.1:10007
+MTU:        : 1500
+
+PC4> ping 192.168.6.19
+host (192.168.6.19) not reachable
+
+PC4> ping 192.168.6.10
+84 bytes from 192.168.6.10 icmp_seq=1 ttl=64 time=0.953 ms
+84 bytes from 192.168.6.10 icmp_seq=2 ttl=64 time=1.138 ms
+84 bytes from 192.168.6.10 icmp_seq=3 ttl=64 time=0.908 ms
+84 bytes from 192.168.6.10 icmp_seq=4 ttl=64 time=1.020 ms
+
+PC4>
+
+----------------------------------------------------------
+
+PC5> show ip
+
+NAME        : PC5[1]
+IP/MASK     : 0.0.0.0/0
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:04
+LPORT       : 10008
+RHOST:PORT  : 127.0.0.1:10009
+MTU:        : 1500
+
+PC5> ip 192.168.6.31/24 192.168.6.1
+Checking for duplicate address...
+PC1 : 192.168.6.31 255.255.255.0 gateway 192.168.6.1
+
+PC5> show ip
+
+NAME        : PC5[1]
+IP/MASK     : 192.168.6.31/24
+GATEWAY     : 192.168.6.1
+DNS         :
+MAC         : 00:50:79:66:68:04
+LPORT       : 10008
+RHOST:PORT  : 127.0.0.1:10009
+MTU:        : 1500
+
+PC5> ping 192.168.6.11
+84 bytes from 192.168.6.11 icmp_seq=1 ttl=64 time=1.200 ms
+84 bytes from 192.168.6.11 icmp_seq=2 ttl=64 time=0.812 ms
+84 bytes from 192.168.6.11 icmp_seq=3 ttl=64 time=1.466 ms
+84 bytes from 192.168.6.11 icmp_seq=4 ttl=64 time=1.002 ms
+
+PC5>
+
+----------------------------------------------------------
+
+PC6> show ip
+
+NAME        : PC6[1]
+IP/MASK     : 0.0.0.0/0
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:05
+LPORT       : 10010
+RHOST:PORT  : 127.0.0.1:10011
+MTU:        : 1500
+
+PC6> ip 192.168.6.32/24 192.168.6.1
+Checking for duplicate address...
+PC1 : 192.168.6.32 255.255.255.0 gateway 192.168.6.1
+
+PC6> show ip
+
+NAME        : PC6[1]
+IP/MASK     : 192.168.6.32/24
+GATEWAY     : 192.168.6.1
+DNS         :
+MAC         : 00:50:79:66:68:05
+LPORT       : 10010
+RHOST:PORT  : 127.0.0.1:10011
+MTU:        : 1500
+
+PC6> ping 192.168.6.10
+84 bytes from 192.168.6.10 icmp_seq=1 ttl=64 time=0.954 ms
+84 bytes from 192.168.6.10 icmp_seq=2 ttl=64 time=1.198 ms
+84 bytes from 192.168.6.10 icmp_seq=3 ttl=64 time=1.188 ms
+
+PC6> ping 192.168.6.21
+84 bytes from 192.168.6.21 icmp_seq=1 ttl=64 time=0.852 ms
+84 bytes from 192.168.6.21 icmp_seq=2 ttl=64 time=0.870 ms
+84 bytes from 192.168.6.21 icmp_seq=3 ttl=64 time=0.882 ms
+84 bytes from 192.168.6.21 icmp_seq=4 ttl=64 time=0.839 ms
+
+PC6>
+
+----------------------------------------------------------

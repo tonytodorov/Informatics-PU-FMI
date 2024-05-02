@@ -1,0 +1,218 @@
+
+ESW1#show vlan-switch brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Fa1/0, Fa1/9, Fa1/10, Fa1/11
+                                                Fa1/12, Fa1/13, Fa1/14, Fa1/15
+100  vlan100                          active    Fa1/1, Fa1/3, Fa1/5, Fa1/7
+200  vlan200                          active    Fa1/2, Fa1/4, Fa1/6, Fa1/8
+1002 fddi-default                     active
+1003 token-ring-default               active
+1004 fddinet-default                  active
+1005 trnet-default                    active
+ESW1#
+
+
+Checking for duplicate address...
+PC1 : 192.168.55.101 255.255.255.0
+
+PC1> show ip
+
+NAME        : PC1[1]
+IP/MASK     : 192.168.55.101/24
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:00
+LPORT       : 10018
+RHOST:PORT  : 127.0.0.1:10019
+MTU:        : 1500
+
+PC1> ping 192.168.55.104
+84 bytes from 192.168.55.104 icmp_seq=1 ttl=64 time=0.974 ms
+84 bytes from 192.168.55.104 icmp_seq=2 ttl=64 time=1.002 ms
+84 bytes from 192.168.55.104 icmp_seq=3 ttl=64 time=1.638 ms
+84 bytes from 192.168.55.104 icmp_seq=4 ttl=64 time=1.404 ms
+84 bytes from 192.168.55.104 icmp_seq=5 ttl=64 time=1.049 ms
+
+PC1> ping 192.168.55.203
+host (192.168.55.203) not reachable
+
+PC1>
+—-----------------------------------------
+
+Checking for duplicate address...
+PC1 : 192.168.55.201 255.255.255.0
+
+PC2> show ip
+
+NAME        : PC2[1]
+IP/MASK     : 192.168.55.201/24
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:01
+LPORT       : 10016
+RHOST:PORT  : 127.0.0.1:10017
+MTU:        : 1500
+
+PC2> ping 192.168.55.204
+84 bytes from 192.168.55.204 icmp_seq=1 ttl=64 time=1.282 ms
+84 bytes from 192.168.55.204 icmp_seq=2 ttl=64 time=0.897 ms
+84 bytes from 192.168.55.204 icmp_seq=3 ttl=64 time=0.829 ms
+84 bytes from 192.168.55.204 icmp_seq=4 ttl=64 time=1.680 ms
+84 bytes from 192.168.55.204 icmp_seq=5 ttl=64 time=1.564 ms
+
+PC2> ping 192.168.55.101
+host (192.168.55.101) not reachable
+
+PC2>
+—------------------------------------
+
+Checking for duplicate address...
+PC1 : 192.168.55.102 255.255.255.0
+
+PC3> show ip
+
+NAME        : PC3[1]
+IP/MASK     : 192.168.55.102/24
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:02
+LPORT       : 10020
+RHOST:PORT  : 127.0.0.1:10021
+MTU:        : 1500
+
+PC3> ping 192.168.55.103
+84 bytes from 192.168.55.103 icmp_seq=1 ttl=64 time=1.357 ms
+84 bytes from 192.168.55.103 icmp_seq=2 ttl=64 time=1.135 ms
+84 bytes from 192.168.55.103 icmp_seq=3 ttl=64 time=1.333 ms
+84 bytes from 192.168.55.103 icmp_seq=4 ttl=64 time=1.035 ms
+84 bytes from 192.168.55.103 icmp_seq=5 ttl=64 time=1.473 ms
+
+PC3>
+—------------------------------------
+Checking for duplicate address...
+PC1 : 192.168.55.202 255.255.255.0
+PC4> show ip
+
+NAME        : PC4[1]
+IP/MASK     : 192.168.55.202/24
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:03
+LPORT       : 10022
+RHOST:PORT  : 127.0.0.1:10023
+MTU:        : 1500
+
+PC4> ping 192.168.55.201
+84 bytes from 192.168.55.201 icmp_seq=1 ttl=64 time=1.184 ms
+84 bytes from 192.168.55.201 icmp_seq=2 ttl=64 time=1.202 ms
+84 bytes from 192.168.55.201 icmp_seq=3 ttl=64 time=1.205 ms
+84 bytes from 192.168.55.201 icmp_seq=4 ttl=64 time=1.021 ms
+84 bytes from 192.168.55.201 icmp_seq=5 ttl=64 time=0.848 ms
+—-----------------------
+
+Checking for duplicate address...
+PC1 : 192.168.55.103 255.255.255.0
+
+PC5> show ip
+
+NAME        : PC5[1]
+IP/MASK     : 192.168.55.103/24
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:04
+LPORT       : 10040
+RHOST:PORT  : 127.0.0.1:10041
+MTU:        : 1500
+
+PC5> ping 192.168.55.104
+84 bytes from 192.168.55.104 icmp_seq=1 ttl=64 time=1.153 ms
+84 bytes from 192.168.55.104 icmp_seq=2 ttl=64 time=1.040 ms
+84 bytes from 192.168.55.104 icmp_seq=3 ttl=64 time=1.565 ms
+84 bytes from 192.168.55.104 icmp_seq=4 ttl=64 time=1.162 ms
+84 bytes from 192.168.55.104 icmp_seq=5 ttl=64 time=0.923 ms
+
+PC5> ping 192.168.55.204
+host (192.168.55.204) not reachable
+
+PC5>
+—---------------------------------------
+
+
+Checking for duplicate address...
+PC1 : 192.168.55.203 255.255.255.0
+
+PC6> show ip
+
+NAME        : PC6[1]
+IP/MASK     : 192.168.55.203/24
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:05
+LPORT       : 10042
+RHOST:PORT  : 127.0.0.1:10043
+MTU:        : 1500
+
+PC6> ping 192.168.55.202
+84 bytes from 192.168.55.202 icmp_seq=1 ttl=64 time=1.241 ms
+84 bytes from 192.168.55.202 icmp_seq=2 ttl=64 time=0.963 ms
+84 bytes from 192.168.55.202 icmp_seq=3 ttl=64 time=1.386 ms
+84 bytes from 192.168.55.202 icmp_seq=4 ttl=64 time=0.965 ms
+84 bytes from 192.168.55.202 icmp_seq=5 ttl=64 time=0.991 ms
+
+PC6>
+
+—------------------------------------------
+
+Checking for duplicate address...
+PC1 : 192.168.55.104 255.255.255.0
+
+PC7> show ip
+
+NAME        : PC7[1]
+IP/MASK     : 192.168.55.104/24
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:06
+LPORT       : 10044
+RHOST:PORT  : 127.0.0.1:10045
+MTU:        : 1500
+
+PC7> ping 192.168.55.101
+84 bytes from 192.168.55.101 icmp_seq=1 ttl=64 time=1.933 ms
+84 bytes from 192.168.55.101 icmp_seq=2 ttl=64 time=1.466 ms
+84 bytes from 192.168.55.101 icmp_seq=3 ttl=64 time=1.421 ms
+84 bytes from 192.168.55.101 icmp_seq=4 ttl=64 time=1.111 ms
+84 bytes from 192.168.55.101 icmp_seq=5 ttl=64 time=1.159 ms
+
+PC7>
+—---------------------------------------
+
+Checking for duplicate address...
+PC1 : 192.168.55.204 255.255.255.0
+
+PC8> show ip
+
+NAME        : PC8[1]
+IP/MASK     : 192.168.55.204/24
+GATEWAY     : 0.0.0.0
+DNS         :
+MAC         : 00:50:79:66:68:07
+LPORT       : 10046
+RHOST:PORT  : 127.0.0.1:10047
+MTU:        : 1500
+
+PC8> ping 192.168.55.201
+84 bytes from 192.168.55.201 icmp_seq=1 ttl=64 time=1.605 ms
+84 bytes from 192.168.55.201 icmp_seq=2 ttl=64 time=1.159 ms
+84 bytes from 192.168.55.201 icmp_seq=3 ttl=64 time=1.441 ms
+84 bytes from 192.168.55.201 icmp_seq=4 ttl=64 time=0.870 ms
+84 bytes from 192.168.55.201 icmp_seq=5 ttl=64 time=1.393 ms
+
+
+PC8> ping 192.168.55.102
+host (192.168.55.102) not reachable
+
+PC8>
+—--------------------------------------------------------

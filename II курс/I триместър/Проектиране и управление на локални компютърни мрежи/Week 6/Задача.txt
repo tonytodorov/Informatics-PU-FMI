@@ -1,0 +1,344 @@
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#int f0/0
+R1(config-if)#ip address 192.168.1.1 255.255.255.0
+R1(config-if)#no shut
+R1(config-if)#
+*Mar  1 00:02:52.351: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up
+*Mar  1 00:02:53.351: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+R1(config-if)#exit
+R1(config)#int f0/1
+R1(config-if)#ip address 192.168.2.1 255.255.255.0
+R1(config-if)#no shut
+R1(config-if)#
+*Mar  1 00:03:57.231: %LINK-3-UPDOWN: Interface FastEthernet0/1, changed state to up
+*Mar  1 00:03:58.231: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+R1(config-if)#exit
+R1(config)#int s0/0
+R1(config-if)#ip address 192.168.3.1 255.255.255.252
+R1(config-if)#no shut
+R1(config-if)#
+*Mar  1 00:06:16.203: %LINK-3-UPDOWN: Interface Serial0/0, changed state to up
+*Mar  1 00:06:17.203: %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0, changed state to up
+R1(config-if)#
+*Mar  1 00:06:42.487: %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0, changed state to down
+R1(config-if)#exit
+R1(config)#ip dhcp pool p1
+R1(dhcp-config)#network 192.168.1.0 255.255.255.0
+R1(dhcp-config)#default-router 192.168.1.1
+R1(dhcp-config)#exit
+R1(config)#ip dhcp pool p2
+R1(dhcp-config)#network 192.168.2.0 255.255.255.0
+R1(dhcp-config)#default-router 192.168.2.1
+R1(dhcp-config)#exit
+R1(config)#ip dhcp excluded-address 192.168.2.1 192.168.2.100
+R1(config)#
+*Mar  1 00:20:52.483: %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0, changed state to up
+R1(config)#exit
+R1#s
+*Mar  1 00:58:11.027: %SYS-5-CONFIG_I: Configured from console by console
+R1#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+C    192.168.1.0/24 is directly connected, FastEthernet0/0
+C    192.168.2.0/24 is directly connected, FastEthernet0/1
+     192.168.3.0/30 is subnetted, 1 subnets
+C       192.168.3.0 is directly connected, Serial0/0
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#router rip
+R1(config-router)#network 192.168.1.0
+R1(config-router)#network 192.168.2.0
+R1(config-router)#network 192.168.3.0
+R1(config-router)#ver 2
+R1(config-router)#exit
+R1(config)#exit
+R1#wr
+*Mar  1 01:06:27.851: %SYS-5-CONFIG_I: Configured from console by console
+R1#wr
+Building configuration...
+[OK]
+R1#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+R    172.18.0.0/16 [120/1] via 192.168.3.2, 00:00:02, Serial0/0
+C    192.168.1.0/24 is directly connected, FastEthernet0/0
+C    192.168.2.0/24 is directly connected, FastEthernet0/1
+     192.168.3.0/30 is subnetted, 1 subnets
+C       192.168.3.0 is directly connected, Serial0/0
+R1#
+-----------------------------
+PC1> ip dhcp
+DDORA IP 192.168.1.2/24 GW 192.168.1.1
+
+PC1> show ip
+
+NAME        : PC1[1]
+IP/MASK     : 192.168.1.2/24
+GATEWAY     : 192.168.1.1
+DNS         :
+DHCP SERVER : 192.168.1.1
+DHCP LEASE  : 86394, 86400/43200/75600
+MAC         : 00:50:79:66:68:00
+LPORT       : 10038
+RHOST:PORT  : 127.0.0.1:10039
+MTU:        : 1500
+
+PC1> ping 172.18.2.2
+172.18.2.2 icmp_seq=1 timeout
+172.18.2.2 icmp_seq=2 timeout
+84 bytes from 172.18.2.2 icmp_seq=3 ttl=62 time=59.536 ms
+84 bytes from 172.18.2.2 icmp_seq=4 ttl=62 time=90.297 ms
+84 bytes from 172.18.2.2 icmp_seq=5 ttl=62 time=90.027 ms
+
+PC1> ping 172.18.3.102
+172.18.3.102 icmp_seq=1 timeout
+172.18.3.102 icmp_seq=2 timeout
+84 bytes from 172.18.3.102 icmp_seq=3 ttl=62 time=90.048 ms
+84 bytes from 172.18.3.102 icmp_seq=4 ttl=62 time=75.334 ms
+84 bytes from 172.18.3.102 icmp_seq=5 ttl=62 time=90.330 ms
+
+PC1>
+------------------
+PC2> ip dhcp
+DDORA IP 192.168.1.3/24 GW 192.168.1.1
+
+PC2> show ip
+
+NAME        : PC2[1]
+IP/MASK     : 192.168.1.3/24
+GATEWAY     : 192.168.1.1
+DNS         :
+DHCP SERVER : 192.168.1.1
+DHCP LEASE  : 86388, 86400/43200/75600
+MAC         : 00:50:79:66:68:01
+LPORT       : 10040
+RHOST:PORT  : 127.0.0.1:10041
+MTU:        : 1500
+
+PC2>
+-----------------
+
+PC3> ip dhcp
+DDORA IP 192.168.2.101/24 GW 192.168.2.1
+
+PC3> show ip
+
+NAME        : PC3[1]
+IP/MASK     : 192.168.2.101/24
+GATEWAY     : 192.168.2.1
+DNS         :
+DHCP SERVER : 192.168.2.1
+DHCP LEASE  : 86391, 86400/43200/75600
+MAC         : 00:50:79:66:68:02
+LPORT       : 10042
+RHOST:PORT  : 127.0.0.1:10043
+MTU:        : 1500
+
+PC3>
+----------------
+PC4> ip dhcp
+DDORA IP 192.168.2.102/24 GW 192.168.2.1
+
+PC4> show ip
+
+NAME        : PC4[1]
+IP/MASK     : 192.168.2.102/24
+GATEWAY     : 192.168.2.1
+DNS         :
+DHCP SERVER : 192.168.2.1
+DHCP LEASE  : 86397, 86400/43200/75600
+MAC         : 00:50:79:66:68:03
+LPORT       : 10044
+RHOST:PORT  : 127.0.0.1:10045
+MTU:        : 1500
+
+PC4> ping 192.168.1.2
+192.168.1.2 icmp_seq=1 timeout
+192.168.1.2 icmp_seq=2 timeout
+84 bytes from 192.168.1.2 icmp_seq=3 ttl=63 time=60.363 ms
+84 bytes from 192.168.1.2 icmp_seq=4 ttl=63 time=45.304 ms
+84 bytes from 192.168.1.2 icmp_seq=5 ttl=63 time=61.127 ms
+
+PC4>
+----------------
+R2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#int f0/0
+R2(config-if)#ip address 172.18.2.1 255.255.255.0
+R2(config-if)#no shut
+R2(config-if)#
+*Mar  1 00:18:40.675: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up
+*Mar  1 00:18:41.675: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+R2(config-if)#exit
+R2(config)#int f0/1
+R2(config-if)#ip address 172.18.3.1 255.255.255.0
+R2(config-if)#no shut
+R2(config-if)#
+*Mar  1 00:19:36.831: %LINK-3-UPDOWN: Interface FastEthernet0/1, changed state to up
+*Mar  1 00:19:37.831: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+R2(config-if)#exit
+R2(config)#int s0/0
+R2(config-if)#ip address 192.168.3.2 255.255.255.252
+R2(config-if)#no shut
+R2(config-if)#
+*Mar  1 00:20:39.443: %LINK-3-UPDOWN: Interface Serial0/0, changed state to up
+*Mar  1 00:20:40.443: %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0, changed state to up
+R2(config-if)#exit
+R2(config)#ip dhcp pool p182
+R2(dhcp-config)#network 172.18.2.0 255.255.255.0
+R2(dhcp-config)#default-router 172.18.2.1
+R2(dhcp-config)#exit
+R2(config)#ip dhcp pool p183
+R2(dhcp-config)#network 172.18.3.0 255.255.255.0
+R2(dhcp-config)#default-router 172.18.3.1
+R2(dhcp-config)#exit
+R2(config)#ip dhcp excluded-address 172.18.3.1 172.18.3.100
+R2(config)#exit
+R2#show ip
+*Mar  1 00:59:39.447: %SYS-5-CONFIG_I: Configured from console by console
+R2#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     172.18.0.0/24 is subnetted, 2 subnets
+C       172.18.2.0 is directly connected, FastEthernet0/0
+C       172.18.3.0 is directly connected, FastEthernet0/1
+     192.168.3.0/30 is subnetted, 1 subnets
+C       192.168.3.0 is directly connected, Serial0/0
+R2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#router rip
+R2(config-router)#network 172.18.2.0
+R2(config-router)#network 172.18.3.0
+R2(config-router)#network 192.168.3.0
+R2(config-router)#ver 2
+R2(config-router)#exit
+R2(config)#exit
+R2#
+*Mar  1 01:06:41.635: %SYS-5-CONFIG_I: Configured from console by console
+R2#wr
+Building configuration...
+[OK]
+R2#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     172.18.0.0/24 is subnetted, 2 subnets
+C       172.18.2.0 is directly connected, FastEthernet0/0
+C       172.18.3.0 is directly connected, FastEthernet0/1
+R    192.168.1.0/24 [120/1] via 192.168.3.1, 00:00:08, Serial0/0
+R    192.168.2.0/24 [120/1] via 192.168.3.1, 00:00:08, Serial0/0
+     192.168.3.0/30 is subnetted, 1 subnets
+C       192.168.3.0 is directly connected, Serial0/0
+R2#
+-----------------
+PC5> ip dhcp
+DDORA IP 172.18.2.2/24 GW 172.18.2.1
+
+PC5> show ip
+
+NAME        : PC5[1]
+IP/MASK     : 172.18.2.2/24
+GATEWAY     : 172.18.2.1
+DNS         :
+DHCP SERVER : 172.18.2.1
+DHCP LEASE  : 86394, 86400/43200/75600
+MAC         : 00:50:79:66:68:04
+LPORT       : 10046
+RHOST:PORT  : 127.0.0.1:10047
+MTU:        : 1500
+
+PC5>
+-------------------
+PC6> ip dhcp
+DDORA IP 172.18.2.3/24 GW 172.18.2.1
+
+PC6> show ip
+
+NAME        : PC6[1]
+IP/MASK     : 172.18.2.3/24
+GATEWAY     : 172.18.2.1
+DNS         :
+DHCP SERVER : 172.18.2.1
+DHCP LEASE  : 86392, 86400/43200/75600
+MAC         : 00:50:79:66:68:05
+LPORT       : 10048
+RHOST:PORT  : 127.0.0.1:10049
+MTU:        : 1500
+
+PC6>
+---------------
+PC7> ip dhcp
+DDORA IP 172.18.3.101/24 GW 172.18.3.1
+
+PC7> show ip
+
+NAME        : PC7[1]
+IP/MASK     : 172.18.3.101/24
+GATEWAY     : 172.18.3.1
+DNS         :
+DHCP SERVER : 172.18.3.1
+DHCP LEASE  : 86394, 86400/43200/75600
+MAC         : 00:50:79:66:68:06
+LPORT       : 10050
+RHOST:PORT  : 127.0.0.1:10051
+MTU:        : 1500
+
+PC7>
+----------------------
+PC8> ip dhcp
+DDORA IP 172.18.3.102/24 GW 172.18.3.1
+
+PC8> show ip
+
+NAME        : PC8[1]
+IP/MASK     : 172.18.3.102/24
+GATEWAY     : 172.18.3.1
+DNS         :
+DHCP SERVER : 172.18.3.1
+DHCP LEASE  : 86393, 86400/43200/75600
+MAC         : 00:50:79:66:68:07
+LPORT       : 10052
+RHOST:PORT  : 127.0.0.1:10053
+MTU:        : 1500
+
+PC8> ping 172.18.2.2
+172.18.2.2 icmp_seq=1 timeout
+172.18.2.2 icmp_seq=2 timeout
+84 bytes from 172.18.2.2 icmp_seq=3 ttl=63 time=45.332 ms
+84 bytes from 172.18.2.2 icmp_seq=4 ttl=63 time=61.050 ms
+84 bytes from 172.18.2.2 icmp_seq=5 ttl=63 time=60.356 ms
+
+PC8>
+-----------------------

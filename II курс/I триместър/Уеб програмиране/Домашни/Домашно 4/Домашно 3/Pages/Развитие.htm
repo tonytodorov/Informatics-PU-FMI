@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+body{
+    background-image: url('https://i.pinimg.com/originals/7b/cb/a5/7bcba55187df137b234567a0337e27df.gif');
+    background-size:100%;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+}
+</style>
+</head>
+
+<p align = "center"><canvas id="myCanvas" width="500" height="300"
+style="border:1px solid #d3d3d3;">
+</canvas></p>
+
+<script>
+
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+
+ctx.moveTo(150,200);
+ctx.lineTo(0,300);
+
+ctx.moveTo(200, 120);
+ctx.lineTo(150, 200);
+
+ctx.moveTo(200, 120);
+ctx.lineTo(260, 200);
+
+ctx.moveTo(300, 100);
+ctx.lineTo(260, 200);
+
+ctx.moveTo(300, 100);
+ctx.lineTo(350, 200);
+
+ctx.moveTo(420, 190);
+ctx.lineTo(350, 200);
+
+ctx.moveTo(420, 190);
+ctx.lineTo(460, 100);
+
+ctx.moveTo(520, 190);
+ctx.lineTo(460, 100);
+
+ctx.stroke();
+
+ctx.font="17px Arial";
+ctx.fillText("Графика на приходите на фирмата през последната година",12,50);
+
+ctx.textAlign = 'right';
+ctx.fillText('right-aligned', x, 130);
+
+</script>
+
+<script>
+    ctx.save();
+    ctx.translate(100, 8);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText("0  10  20  30  40  50  60  70  80  90  100", 10, 400);
+    ctx.restore();
+</script> 
+
+<body>
+<p align = "center">I &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+   II &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   III &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+   IV &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    V &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+   VI &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+   VII &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+   VIII &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+   IX &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    X &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+   XI &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+   XII</p>
+</body>
+</html>

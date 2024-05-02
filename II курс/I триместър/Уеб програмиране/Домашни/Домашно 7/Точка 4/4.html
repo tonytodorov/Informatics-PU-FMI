@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("demo").value;
+            if (x == "" || isNaN(x)) {
+                alert("Невалидна стойност");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <p>Посочете броя на желаните артикули:</p>
+    <input id="demo" type="text">
+    <button type="button" onclick="myFunction()">Изпрати</button>
+    <p>Посочете ден за доставка:</p>
+    <input id="demo" type="text">
+    <button type="button" onclick="myFunction()">Изпрати</button>
+    <p>Посочете час за доставка:</p>
+    <input id="demo" type="text">
+    <button type="button" onclick="myFunction()">Изпрати</button>
+</body>
+
+</html>

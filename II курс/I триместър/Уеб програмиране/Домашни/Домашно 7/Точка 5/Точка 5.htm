@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<form name="quiz" method="post" name="buttons" id="quiz" onsubmit="return false">
+
+<div class="question">Произведението на числата 3008 и 25 е равно на:</div></li>
+<input id="answer" type="radio" name="group1" value="correct">75 200<br>
+<input id="answer" type="radio" name="group1" value="wrong">75 300<br>
+<input id="answer" type="radio" name="group1" value="wrong">75 400<hr>
+
+<div class="question"> Сборът на числата 6 508 702 и 887 268 е равен на:</div></li>
+<input id="answer" type="radio" name="group2" value="wrong">7 395 980<br>
+<input id="answer" type="radio" name="group2" value="correct">7 395 970<br>
+<input id="answer" type="radio" name="group2" value="wrong">7 385 970<hr>
+
+<div class="question">Разликата на числата 764 708 и 32 507 е равна на:</div></li>
+<input id="answer" type="radio" name="group3" value="wrong">731 201<br>
+<input id="answer" type="radio" name="group3" value="wrong">732 101<br>
+<input id="answer" type="radio" name="group3" value="correct" >732 201<hr>
+
+<button class="submit" onclick="return handleClick();" type="submit">Изпращане</button>
+</form>
+
+<script>
+function handleClick(){         
+   var amountCorrect = 0;          
+   for(var i = 1; i <= 45; i++) {
+   var radios = document.getElementsByName('group'+i);
+   for(var j = 0; j < radios.length; j++) {
+       var radio = radios[j];
+         if(radio.value == "correct" && radio.checked) {
+              amountCorrect++;
+          }
+       }
+    }                   
+     alert("Верни отговори: " + amountCorrect);
+}
+</script>
+</body>
+</html>
