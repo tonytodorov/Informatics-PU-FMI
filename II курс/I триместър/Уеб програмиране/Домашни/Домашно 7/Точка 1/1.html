@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+        #div1 {
+            width: 120px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div2 {
+            width: 100px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div3 {
+            width: 100px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div4 {
+            width: 100px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div5 {
+            width: 100px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div6 {
+            width: 100px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div7 {
+            width: 100px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div8 {
+            width: 100px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div9 {
+            width: 100px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div10 {
+            width: 100px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div11 {
+            width: 100px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div12 {
+            width: 100px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        #div13 {
+            width: 100px;
+            height: 10px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+
+        p {
+            font-size: 30px;
+        }
+
+        .button {
+            background-color: #564caf;
+            border: 3px;
+            color: white;
+            border-radius: 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+    </script>
+</head>
+
+<body>
+    <p>Подредете думите в правилен ред:</p>
+    <div id="drag1" draggable="true" ondragstart="drag(event)" width="150" height="10"><button
+            class="button">от</button></div>
+    <br>
+    <div id="drag2" draggable="true" ondragstart="drag(event)" width="150" height="10"><button class="button">е</button>
+    </div>
+    <br>
+    <div id="drag3" draggable="true" ondragstart="drag(event)" width="150" height="10"><button
+            class="button">род</button></div>
+    <br>
+    <div id="drag4" draggable="true" ondragstart="drag(event)" width="150" height="10"><button
+            class="button">Дуло</button></div>
+    <br>
+    <div id="drag5" draggable="true" ondragstart="drag(event)" width="150" height="10"><button
+            class="button">България</button></div>
+    <br>
+    <div id="drag6" draggable="true" ondragstart="drag(event)" width="150" height="10"><button
+            class="button">произхожда</button></div>
+    <br>
+    <div id="drag7" draggable="true" ondragstart="drag(event)" width="150" height="10"><button
+            class="button">Велика</button></div>
+    <br>
+    <div id="drag8" draggable="true" ondragstart="drag(event)" width="150" height="10"><button
+            class="button">рода</button></div>
+    <br>
+    <div id="drag9" draggable="true" ondragstart="drag(event)" width="150" height="10"><button class="button">в</button>
+    </div>
+    <br>
+    <div id="drag10" draggable="true" ondragstart="drag(event)" width="150" height="10"><button
+            class="button">управляващ</button></div>
+    <br>
+    <div id="drag11" draggable="true" ondragstart="drag(event)" width="150" height="10"><button
+            class="button">Аспарух</button></div>
+    <br>
+    <div id="drag12" draggable="true" ondragstart="drag(event)" width="150" height="10"><button
+            class="button">Стара</button></div>
+    <br>
+    <div id="drag13" draggable="true" ondragstart="drag(event)" width="150" height="10"><button
+            class="button">който</button></div>
+    <br>
+
+    <p>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div6" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div7" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div8" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div9" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div10" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div11" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div12" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <div id="div13" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    </p>
+</body>
+
+</html>

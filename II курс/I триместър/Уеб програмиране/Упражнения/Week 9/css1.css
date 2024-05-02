@@ -1,0 +1,36 @@
+
+ul.a {
+  list-style-type: circle;
+}
+
+#top{
+height:80px;
+width:100%;
+float:left;
+background:#aaaaaa;
+border-bottom:1px solid black;
+}
+
+#left{
+width:15%;
+float:left;
+height:320px;
+background:#cccccc;
+}
+
+#content{
+position:relative;
+float:left;
+height: 320px;    
+width: 85%;
+overflow:scroll;
+}
+
+
+#footer{
+height:80px;
+width:100%;
+float:left;
+background:#aaaaaa;
+border-top:1px solid black;
+}

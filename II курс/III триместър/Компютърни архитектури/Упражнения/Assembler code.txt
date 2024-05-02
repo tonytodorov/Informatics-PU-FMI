@@ -1,0 +1,30 @@
+%include "io.inc"
+section .data
+section .bss
+section .text
+num3 resq 1
+msg db 'maximum: ', 0
+global CMAIN
+CMAIN:
+
+    GET_DEC 8, R15
+    GET_DEC 8, R14
+    GET_DEC 8, [num3]
+    
+    cmp R15, R14
+    jg max1
+     mov R8, R14
+      jmp afterMax1
+    max1:
+     mov R8, R15
+    afterMax1:
+     cmp[num3], R8
+      jng endMax
+       mov R8, [num3]
+    endMax:
+     PRINT STRING [msg]
+     PRINT_DEC 8, R8
+     NEWLINE
+    
+    xor eax, eax
+    ret

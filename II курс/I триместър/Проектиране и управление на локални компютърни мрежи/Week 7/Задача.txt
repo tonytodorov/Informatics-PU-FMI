@@ -1,0 +1,312 @@
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#int f0/0
+R1(config-if)#ip address 192.168.10.1 255.255.255.0
+R1(config-if)#no shut
+R1(config-if)#
+*Mar  1 00:02:30.719: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up
+*Mar  1 00:02:31.719: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+R1(config-if)#exit
+R1(config)#int s0/0
+R1(config-if)#ip address 193.0.1.1 255.255.255.252
+R1(config-if)#no shut
+R1(config-if)#
+*Mar  1 00:03:25.811: %LINK-3-UPDOWN: Interface Serial0/0, changed state to up
+*Mar  1 00:03:26.811: %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0, changed state to up
+R1(config-if)#exit
+R1(config)#i
+*Mar  1 00:03:52.435: %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0, changed state to down
+R1(config)#ip dhcp pool p10
+R1(dhcp-config)#network 192.168.10.0 255.255.255.0
+R1(dhcp-config)#default-router 192.168.10.1
+R1(dhcp-config)#exit
+R1(config)#
+*Mar  1 00:07:32.427: %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0, changed state to up
+R1(config)#exit
+R1#
+*Mar  1 00:11:51.343: %SYS-5-CONFIG_I: Configured from console by console
+R1#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+C    192.168.10.0/24 is directly connected, FastEthernet0/0
+     193.0.1.0/30 is subnetted, 1 subnets
+C       193.0.1.0 is directly connected, Serial0/0
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#ip route 194.0.0.0 255.255.255.255 193.0.1.2
+R1(config)#exit
+R1#
+*Mar  1 00:20:52.431: %SYS-5-CONFIG_I: Configured from console by console
+R1#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+C    192.168.10.0/24 is directly connected, FastEthernet0/0
+     193.0.1.0/30 is subnetted, 1 subnets
+C       193.0.1.0 is directly connected, Serial0/0
+     194.0.0.0/32 is subnetted, 1 subnets
+S       194.0.0.0 [1/0] via 193.0.1.2
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#no ip route 194.0.0.0 255.255.255.255 193.0.1.2
+R1(config)#exit
+R1#
+*Mar  1 00:31:26.495: %SYS-5-CONFIG_I: Configured from console by console
+R1#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+C    192.168.10.0/24 is directly connected, FastEthernet0/0
+     193.0.1.0/30 is subnetted, 1 subnets
+C       193.0.1.0 is directly connected, Serial0/0
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#ip route 0.0.0.0 0.0.0.0 193.0.1.2
+R1(config)#exit
+R1#
+*Mar  1 00:33:49.307: %SYS-5-CONFIG_I: Configured from console by console
+R1#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is 193.0.1.2 to network 0.0.0.0
+
+C    192.168.10.0/24 is directly connected, FastEthernet0/0
+     193.0.1.0/30 is subnetted, 1 subnets
+C       193.0.1.0 is directly connected, Serial0/0
+S*   0.0.0.0/0 [1/0] via 193.0.1.2
+R1#wr
+Building configuration...
+[OK]
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#int f0/1
+R1(config-if)#ip address 192.168.11.1 255.255.255.0
+R1(config-if)#no shut
+R1(config-if)#exit
+*Mar  1 01:28:59.007: %LINK-3-UPDOWN: Interface FastEthernet0/1, changed state to up
+*Mar  1 01:29:00.007: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+R1(config-if)#exit
+R1(config)#exit
+R1#wr
+Building configuration...
+[OK]
+R1#
+*Mar  1 01:29:04.875: %SYS-5-CONFIG_I: Configured from console by console
+R1#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is 193.0.1.2 to network 0.0.0.0
+
+C    192.168.10.0/24 is directly connected, FastEthernet0/0
+C    192.168.11.0/24 is directly connected, FastEthernet0/1
+     193.0.1.0/30 is subnetted, 1 subnets
+C       193.0.1.0 is directly connected, Serial0/0
+S*   0.0.0.0/0 [1/0] via 193.0.1.2
+R1#
+---------------------------------------------------------------
+R2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#int s0/0
+R2(config-if)#ip address 193.0.1.2 255.255.255.252
+R2(config-if)#no shut
+R2(config-if)#
+*Mar  1 00:07:17.955: %LINK-3-UPDOWN: Interface Serial0/0, changed state to up
+*Mar  1 00:07:18.955: %LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/0, changed state to up
+R2(config-if)#exit
+R2(config)#int l0
+R2(config-if)#
+*Mar  1 00:08:25.711: %LINEPROTO-5-UPDOWN: Line protocol on Interface Loopback0, changed state to up
+R2(config-if)#ip address 194.0.0.1 255.255.255.255
+R2(config-if)#exit
+R2(config)#exit
+R2#
+*Mar  1 00:14:17.699: %SYS-5-CONFIG_I: Configured from console by console
+R2#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+     193.0.1.0/30 is subnetted, 1 subnets
+C       193.0.1.0 is directly connected, Serial0/0
+     194.0.0.0/32 is subnetted, 1 subnets
+C       194.0.0.1 is directly connected, Loopback0
+R2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#ip route 192.168.10.0 255.255.255.0 193.0.1.1
+R2(config)#exit
+R2#
+*Mar  1 00:25:47.595: %SYS-5-CONFIG_I: Configured from console by console
+R2#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+S    192.168.10.0/24 [1/0] via 193.0.1.1
+     193.0.1.0/30 is subnetted, 1 subnets
+C       193.0.1.0 is directly connected, Serial0/0
+     194.0.0.0/32 is subnetted, 1 subnets
+C       194.0.0.1 is directly connected, Loopback0
+R2#wr
+Building configuration...
+[OK]
+R2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#ip route 192.168.11.0 255.255.255.0 193.0.1.1
+R2(config)#exit
+R2#
+*Mar  1 01:25:38.447: %SYS-5-CONFIG_I: Configured from console by console
+R2#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+S    192.168.10.0/24 [1/0] via 193.0.1.1
+S    192.168.11.0/24 [1/0] via 193.0.1.1
+     193.0.1.0/30 is subnetted, 1 subnets
+C       193.0.1.0 is directly connected, Serial0/0
+     194.0.0.0/32 is subnetted, 1 subnets
+C       194.0.0.1 is directly connected, Loopback0
+R2#
+-------------------------------------------------------------------------------
+PC1> ip dhcp
+DDORA IP 192.168.10.2/24 GW 192.168.10.1
+
+PC1> show ip
+
+NAME        : PC1[1]
+IP/MASK     : 192.168.10.2/24
+GATEWAY     : 192.168.10.1
+DNS         :
+DHCP SERVER : 192.168.10.1
+DHCP LEASE  : 86396, 86400/43200/75600
+MAC         : 00:50:79:66:68:00
+LPORT       : 10014
+RHOST:PORT  : 127.0.0.1:10015
+MTU:        : 1500
+
+PC1> ping 194.0.0.1
+*192.168.10.1 icmp_seq=1 ttl=255 time=30.482 ms (ICMP type:3, code:1, Destination host unreachable)
+*192.168.10.1 icmp_seq=2 ttl=255 time=30.334 ms (ICMP type:3, code:1, Destination host unreachable)
+*192.168.10.1 icmp_seq=3 ttl=255 time=30.257 ms (ICMP type:3, code:1, Destination host unreachable)
+*192.168.10.1 icmp_seq=4 ttl=255 time=30.656 ms (ICMP type:3, code:1, Destination host unreachable)
+*192.168.10.1 icmp_seq=5 ttl=255 time=31.651 ms (ICMP type:3, code:1, Destination host unreachable)
+
+PC1> ping 194.0.0.1
+*192.168.10.1 icmp_seq=1 ttl=255 time=30.358 ms (ICMP type:3, code:1, Destination host unreachable)
+*192.168.10.1 icmp_seq=2 ttl=255 time=30.296 ms (ICMP type:3, code:1, Destination host unreachable)
+*192.168.10.1 icmp_seq=3 ttl=255 time=30.431 ms (ICMP type:3, code:1, Destination host unreachable)
+*192.168.10.1 icmp_seq=4 ttl=255 time=29.909 ms (ICMP type:3, code:1, Destination host unreachable)
+*192.168.10.1 icmp_seq=5 ttl=255 time=15.336 ms (ICMP type:3, code:1, Destination host unreachable)
+
+PC1> ping 194.0.0.1
+84 bytes from 194.0.0.1 icmp_seq=1 ttl=254 time=45.325 ms
+84 bytes from 194.0.0.1 icmp_seq=2 ttl=254 time=60.583 ms
+84 bytes from 194.0.0.1 icmp_seq=3 ttl=254 time=60.412 ms
+84 bytes from 194.0.0.1 icmp_seq=4 ttl=254 time=60.675 ms
+84 bytes from 194.0.0.1 icmp_seq=5 ttl=254 time=45.576 ms
+
+PC1> save
+Saving startup configuration to startup.vpc
+.  done
+
+PC1>
+----------------------------------------------------------------------------------
+PC2> ip dhcp
+DDORA IP 192.168.10.3/24 GW 192.168.10.1
+
+PC2> show ip
+
+NAME        : PC2[1]
+IP/MASK     : 192.168.10.3/24
+GATEWAY     : 192.168.10.1
+DNS         :
+DHCP SERVER : 192.168.10.1
+DHCP LEASE  : 86394, 86400/43200/75600
+MAC         : 00:50:79:66:68:01
+LPORT       : 10016
+RHOST:PORT  : 127.0.0.1:10017
+MTU:        : 1500
+
+PC2> save
+Saving startup configuration to startup.vpc
+.  done
+
+PC2>
+---------------------------------------------------------------------------
+PC3> ip 192.168.11.100/24 192.168.11.1
+Checking for duplicate address...
+PC1 : 192.168.11.100 255.255.255.0 gateway 192.168.11.1
+
+PC3> show ip
+
+NAME        : PC3[1]
+IP/MASK     : 192.168.11.100/24
+GATEWAY     : 192.168.11.1
+DNS         :
+MAC         : 00:50:79:66:68:02
+LPORT       : 10024
+RHOST:PORT  : 127.0.0.1:10025
+MTU:        : 1500
+
+PC3> ping 194.0.0.1
+84 bytes from 194.0.0.1 icmp_seq=1 ttl=254 time=45.369 ms
+84 bytes from 194.0.0.1 icmp_seq=2 ttl=254 time=60.358 ms
+84 bytes from 194.0.0.1 icmp_seq=3 ttl=254 time=60.446 ms
+84 bytes from 194.0.0.1 icmp_seq=4 ttl=254 time=60.676 ms
+84 bytes from 194.0.0.1 icmp_seq=5 ttl=254 time=60.413 ms
+
+PC3>
+-------------------------------------------------------------------------
+

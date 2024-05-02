@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<meta charset=utf-8 />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Calculator</title>
+<link rel="stylesheet" href="buttonstyle.css">
+<link rel="stylesheet" href="boxStyle.css">
+<link rel="stylesheet" href="calc.css">
+
+</head>
+<body>
+<h1 class = "h1">Бизнес калкулатор</h1>
+<form name= "f">
+
+<div class="calculator">
+
+  <center><font size="5" color="white">Резултат</font></center>
+  <p id = "sanswer" class = "inset"/>
+
+<div>   
+  <input type="text" placeholder="Приходи:" class="type-1" id="sn1" value=""/><br>
+  <input type="text" placeholder="Разходи:" class="type-1" id="sn2" value=""/><br>
+  <div id="newField"></div>
+  <button type="button" class="btn" id="add" style="width:100%">Нов месец</button>&nbsp&nbsp&nbsp&nbsp&nbsp
+  <script src="addBox.js"></script>
+  <script src="calculateTax.js"></script>
+  <script src="calculateProfit.js"></script>
+</div>&nbsp 
+
+
+<button type="button" class="btn" onclick="calculateTax()" style="width:45%; height:30%">Изчисли данък</button>&nbsp&nbsp
+<button type="button" class="btn" onclick="calculateProfit()" style="width:45%; height:30%"; float:right>Изчисли печалба</button>
+
+<div>
+<input type="reset" onclick="location.reload()" style="width:100%;height:30%; float:center" class="btn"  value="Изчисти">
+</div>
+</div>  
+</form>
+</body>
+</html>

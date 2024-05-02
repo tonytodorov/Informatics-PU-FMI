@@ -1,0 +1,7 @@
+D:\Обучение ПУ\4-та година\1-ви семестър\Методи на транслация\Проект\C#\SharpDevelop\bin\Debug\scsc.exe.config
+D:\Обучение ПУ\4-та година\1-ви семестър\Методи на транслация\Проект\C#\SharpDevelop\bin\Debug\scsc.exe
+D:\Обучение ПУ\4-та година\1-ви семестър\Методи на транслация\Проект\C#\SharpDevelop\bin\Debug\scsc.pdb
+D:\Обучение ПУ\4-та година\1-ви семестър\Методи на транслация\Проект\C#\SharpDevelop\obj\Debug\scsc.csproj.AssemblyReference.cache
+D:\Обучение ПУ\4-та година\1-ви семестър\Методи на транслация\Проект\C#\SharpDevelop\obj\Debug\scsc.csproj.CoreCompileInputs.cache
+D:\Обучение ПУ\4-та година\1-ви семестър\Методи на транслация\Проект\C#\SharpDevelop\obj\Debug\scsc.exe
+D:\Обучение ПУ\4-та година\1-ви семестър\Методи на транслация\Проект\C#\SharpDevelop\obj\Debug\scsc.pdb

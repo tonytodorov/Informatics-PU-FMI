@@ -1,0 +1,565 @@
+-- CREATE TABLES
+create table employees
+( emp_id NUMBER PRIMARY KEY,
+  first_name VARCHAR2(30) NOT NULL,
+  last_name VARCHAR2(30)  NOT NULL,
+  addl_name VARCHAR2(30),
+  address VARCHAR2(100) NOT NULL,
+  phone VARCHAR2(20),
+  email VARCHAR2(30),
+  job_title VARCHAR2(30) NOT NULL,
+  dep_id NUMBER NOT NULL
+);
+
+SELECT *
+FROM employees;
+
+create table departments
+( dep_id NUMBER PRIMARY KEY,
+  name VARCHAR2(100)
+);
+
+SELECT *
+FROM departments;
+
+
+create table customers
+( cust_id NUMBER PRIMARY KEY,
+  first_name VARCHAR2(30) NOT NULL,
+  last_name VARCHAR2(30)  NOT NULL,
+  addl_name VARCHAR2(30),
+  address VARCHAR2(100) NOT NULL,
+  phone VARCHAR2(20),
+  email VARCHAR2(30)
+);
+
+SELECT *
+FROM customers;
+
+-- FOREIGN KEY FOR EMPLOYEES AND DEPARTMENTS
+ALTER TABLE employees
+ADD CONSTRAINT fk_departments
+  FOREIGN KEY (dep_id)
+  REFERENCES departments(dep_id);
+
+
+-- INSERT DATA INTO TABLES
+insert into departments
+values (1,'Операции');
+insert into departments
+values (2,'Кредитен анализ');
+insert into departments
+values (3,'Картови разплащания');
+
+insert into employees(emp_id, first_name, last_name, addl_name, address, phone, email, job_title, dep_id)
+values (1,'Angel', 'Georgiev', '', 'Bulgaria', '0895465456', 'angelbgpl@gmail.com', 'Operator', 1);
+
+insert into employees (emp_id, first_name, last_name, addl_name, address, phone, email, job_title, dep_id)
+values (2,'Vasil', 'Grigorov', '', 'Italy', '0889312422', 'vas@gmail.com', 'Cards', 3);
+
+insert into employees (emp_id, first_name, last_name, addl_name, address, phone, email, job_title, dep_id)
+values (3,'Petar', 'Angelov', '', 'Bulgaria', '0889554790', 'Pet@gmail.com', 'Credit operator', 2);
+
+insert into employees (emp_id, first_name, last_name, addl_name, address, phone, email, job_title, dep_id)
+values (4,'Ivan', 'Andonov', '', 'Bulgaria', '0895423500', 'Iva@gmail.com', 'Operator', 1);
+
+insert into employees (emp_id, first_name, last_name, addl_name, address, phone, email, job_title, dep_id)
+values (5,'Nikola', 'Ivanov', '', 'Bulgaria', '0899213033', 'Nii@gmail.com', 'Cards', 3);
+
+insert into employees (emp_id, first_name, last_name, addl_name, address, phone, email, job_title, dep_id)
+values (6,'Georgi', 'Vasilev', '', 'Bulgaria', '0884523490', 'Gev@gmail.com', 'Credit operator', 2);
+
+insert into employees (emp_id, first_name, last_name, addl_name, address, phone, email, job_title, dep_id)
+values (7,'Maria', 'Ivanova', '', 'Bulgaria', '0884832044', 'Mai@gmail.com', 'Cards', 3);
+
+insert into employees (emp_id, first_name, last_name, addl_name, address, phone, email, job_title, dep_id)
+values (8,'Gergana', 'Nikolova', '', 'Bulgaria', '0889145503', 'Mai@gmail.com', 'Operator', 1);
+
+insert into employees (emp_id, first_name, last_name, addl_name, address, phone, email, job_title, dep_id)
+values (9,'Vladimir', 'Georgiev', '', 'Bulgaria', '0889201837', 'Mai@gmail.com', 'Cards', 3);
+
+insert into customers (cust_id, first_name, last_name, addl_name, address, phone, email)
+values (1,'Ivan', 'Ivanov', '', 'France', '0892165', 'iv@gmail.com');
+
+insert into customers (cust_id, first_name, last_name, addl_name, address, phone, email)
+values (2,'Georgi', 'Petrov', '', 'Bulgaria', '089216655', 'gi@gmail.com');
+
+insert into customers (cust_id, first_name, last_name, addl_name, address, phone, email)
+values (3,'Silvia', 'Ivanova', '', 'Germany', '089215465', 'siv@gmail.com');
+
+insert into customers (cust_id, first_name, last_name, addl_name, address, phone, email)
+values (4,'Valentina', 'Georgieva', '', 'Bulgaria', '089212165', 'vag@gmail.com');
+
+-- ADD SALARY COLUMN
+alter table employees
+add salary number;
+
+-- ADD DATE_STARTED COLUMN
+alter table employees
+add date_started DATE DEFAULT sysdate NOT NULL;
+
+-- CREATE TABLE FOR BANK ACCOUNTS
+create table bank_account
+( bank_account_id NUMBER PRIMARY KEY,
+  IBAN VARCHAR2(22),
+  amount_of_money NUMBER,
+  currency VARCHAR2(3) DEFAULT 'BGN'
+);
+
+-- MAKE IBAN UNIQUE
+ALTER TABLE bank_account
+ADD CONSTRAINT IBAN_unique UNIQUE(IBAN);
+
+-- ADD BANK_ACCOUNT_ID TO CUSTOMERS TABLE
+alter table customers
+add bank_account_id NUMBER;
+
+-- FOREIGN KEY FOR CUSTOMERS AND BANK_ACCOUNT
+ALTER TABLE customers
+ADD CONSTRAINT fk_bank_account
+  FOREIGN KEY (bank_account_id)
+  REFERENCES bank_account(bank_account_id);
+
+-- INSERT DATA INTO BANK_ACCOUNT
+insert into bank_account (bank_account_id, IBAN, amount_of_money, currency)
+values (1,'BG64UNCR70004449361467', 10000, 'BGN');
+
+insert into bank_account (bank_account_id, IBAN, amount_of_money, currency)
+values (2,'BG85STSA93006356124641', 12000, 'USD');
+
+insert into bank_account (bank_account_id, IBAN, amount_of_money, currency)
+values (3,'BG79RZBB91555538816893', 18000, 'BGN');
+
+insert into bank_account (bank_account_id, IBAN, amount_of_money, currency)
+values (4,'BG40TTBB94005998736619', 0, 'EUR');
+
+select * from customers;
+select * from bank_account;
+
+
+-- UPDATE BANK_ACCOUNT_ID IN CUSTOMERS TABLE
+UPDATE customers
+SET bank_account_id = 1
+WHERE cust_id = 1;
+
+UPDATE customers
+SET bank_account_id = 2
+WHERE cust_id = 2;
+
+UPDATE customers
+SET bank_account_id = 3
+WHERE cust_id = 3;
+
+UPDATE customers
+SET bank_account_id = 4
+WHERE cust_id = 4;
+
+
+-- SET SALARY
+UPDATE employees
+SET salary = 2000
+WHERE emp_id = 1;
+
+UPDATE employees
+SET salary = 3500
+WHERE emp_id = 2;
+
+UPDATE employees
+SET salary = 0
+WHERE emp_id = 3;
+
+UPDATE employees
+SET salary = 1500
+WHERE emp_id = 4;
+
+UPDATE employees
+SET salary = 2200
+WHERE emp_id = 5;
+
+UPDATE employees
+SET salary = 2600
+WHERE emp_id = 6;
+
+UPDATE employees
+SET salary = 1800
+WHERE emp_id = 7;
+
+UPDATE employees
+SET salary = 3200
+WHERE emp_id = 8;
+
+UPDATE employees
+SET salary = 1400
+WHERE emp_id = 9;
+
+select *
+from employees;
+
+-- Бизнес заявки част 1
+
+-- 1
+select name from departments;
+
+-- 2
+select first_name, last_name, salary
+from employees;
+
+-- 3
+select lower(first_name||'.'||last_name||'@bankoftomarow.bg') as email, first_name, last_name
+from employees;
+
+-- 4
+select *
+from employees
+where date_started < add_months(sysdate, -60);
+
+-- 5
+select first_name, last_name, addl_name  
+from employees 
+where first_name LIKE '%I%';
+
+-- Бизнес заявки част 2
+
+-- CREATE A HISTORY_OF_EMP TABLE
+create table history_of_emp(
+    emp_id NUMBER,
+    first_name VARCHAR2(50),
+    last_name VARCHAR2(50),
+    department_before VARCHAR2(50),
+    department_after VARCHAR2(50)
+);
+
+-- CREATE TRIGGER
+CREATE OR REPLACE TRIGGER employees_after_update
+AFTER UPDATE
+   ON employees
+   FOR EACH ROW
+   
+   DECLARE
+   v_username varchar2(10);
+
+BEGIN
+
+   SELECT user INTO v_username
+   FROM dual;
+   
+   INSERT INTO history_of_emp
+   ( dep_id,
+     department_before,
+     department_after,
+     username)
+   VALUES
+   ( :new.dep_id,
+     :old.department,
+     :new.department,
+     v_username);
+
+END;
+
+-- 1
+select * from employees;
+insert into history_of_emp (emp_id, first_name, last_name, department_before, department_after)
+values (1,'Angel', 'Georgiev', '1', '2');
+
+insert into history_of_emp (emp_id, first_name, last_name, department_before, department_after)
+values (3,'Petar', 'Angelov', '2', '3');
+
+insert into history_of_emp (emp_id, first_name, last_name, department_before, department_after)
+values (7,'Maria', 'Ivanova', '3', '1');
+
+
+-- Бизнес заявки част 3
+
+-- ADD EMP_STATUS COLUMN
+alter table employees
+add emp_status VARCHAR2(30);
+
+-- UPDATE EMP_STATUS COLUMN
+UPDATE employees
+SET emp_status = 'active'
+WHERE emp_id in (1,2,5,7);
+
+UPDATE employees
+SET emp_status = 'sick'
+WHERE emp_id = 3;
+
+UPDATE employees
+SET emp_status = 'injured'
+WHERE emp_id = 4;
+
+UPDATE employees
+SET emp_status = 'fired'
+WHERE emp_id = 6;
+
+UPDATE employees
+SET emp_status = 'maternity'
+WHERE emp_id = 8;
+
+UPDATE employees
+SET emp_status = 'vacation'
+WHERE emp_id = 9;
+
+-- 1
+select *
+from employees
+where emp_status = 'fired';
+
+-- 2
+select *
+from employees
+where emp_status = 'maternity';
+
+-- 3
+select *
+from employees
+where emp_status = 'vacation'
+or emp_status = 'sick';
+
+-- ADD MANAGER_ID COLUMN
+alter table employees
+add manager_id NUMBER;
+
+-- UPDATE MANAGER_ID IN EMPLOYEES
+UPDATE employees
+SET manager_id = 1
+WHERE emp_id = 2;
+
+UPDATE employees
+SET manager_id = 2
+WHERE emp_id = 4;
+
+UPDATE employees
+SET manager_id = 3
+WHERE emp_id = 6;
+
+-- 4
+select *
+from employees
+where manager_id is null;
+
+-- 5 
+select * 
+from employees
+where date_started < add_months(sysdate, -60)
+and salary > 5000
+order by first_name;
+
+-- 6
+select first_name, dep_id, salary
+from employees e
+where e.salary IN
+(
+select max(salary)
+from employees
+group by dep_id
+);
+
+-- 7
+select first_name, last_name, salary, name
+from employees e, departments d
+where e.dep_id = d.dep_id and (e.dep_id,e.salary) in
+( 
+select dep_id, min(salary)
+from employees
+group by dep_id
+);
+
+-- 8
+select d.name, round (avg(e.salary)) avg_sal
+from departments d
+join employees e on e.dep_id = d.dep_id
+group by d.name
+
+
+-- Бизнес заявки част 4
+-- 1
+select c.cust_id, c.first_name, c.last_name 
+from customers c
+join bank_account b on c.bank_account_id = b.bank_account_id
+where currency != 'BGN';
+
+-- 2
+select c.cust_id, c.first_name, c.last_name 
+from customers c
+join bank_account b on c.bank_account_id = b.bank_account_id
+where amount_of_money = 0;
+
+-- ADD BANK_TITLE COLUMN
+alter table bank_account
+add bank_title VARCHAR2(100);
+
+-- 3
+-- UPDATE BANK_TITLE
+update bank_account
+set bank_title = IBAN||currency
+where bank_account_id in (1,2,3,4);
+
+-- FUNCTIONAL PART
+
+-- 1
+create table users
+(
+id NUMBER generated as identity primary key,
+username VARCHAR2(30),
+password  VARCHAR2(30)
+);
+
+select * from users;
+
+--------------------------------------------------------------------------------
+
+create or replace NONEDITIONABLE TYPE customer_type AS OBJECT (
+    cust_id    NUMBER,
+    first_name VARCHAR2(30 BYTE),
+    last_name  VARCHAR2(30 BYTE),
+    addl_name  VARCHAR2(30 BYTE),
+    address    VARCHAR2(100 BYTE),
+    phone      VARCHAR2(20 BYTE),
+    email      VARCHAR2(30 BYTE),
+    salary      VARCHAR2(30 BYTE),
+    
+    constructor function customer_type return self as result
+);
+
+
+--------------------------------------------------------------------------------
+
+
+create or replace NONEDITIONABLE type body customer_type is
+
+    constructor function customer_type return self as result
+    IS
+    BEGIN
+    RETURN;
+    END;
+end;
+
+
+--------------------------------------------------------------------------------
+
+create or replace NONEDITIONABLE TYPE user_type AS OBJECT (
+    id NUMBER,
+    username VARCHAR2(30 BYTE),
+    password  VARCHAR2(30 BYTE)
+);
+
+--------------------------------------------------------------------------------
+
+set serveroutput on;
+
+--VARRAY
+DECLARE
+  type array_t is varray(3) of varchar2(10);
+  
+  l_array array_t := array_t('Matt', 'Joanne', 'Robert');
+  
+  type array_n is varray(3) of number;
+  
+  l_array_n array_n := array_n(1, 2, 3);
+BEGIN
+ for i in 1..l_array.count loop
+       dbms_output.put_line(l_array(i));
+   end loop;
+   
+   
+ for i in 1..l_array_n.count loop
+       dbms_output.put_line(l_array_n(i));
+   end loop;
+END;
+
+--------------------------------------------------------------------------------
+
+--NESTED TABLE
+DECLARE
+   TYPE names_table IS TABLE OF VARCHAR2(10);
+   TYPE grades IS TABLE OF NUMBER;
+   
+   names names_table;   
+   marks grades; 
+   total integer; 
+BEGIN
+   names := names_table('Kavita', 'Pritam', 'Ayan', 'Rishav', 'Aziz');
+   marks:= grades(3, 4, 2, 5, 6);
+   total := names.count;
+   dbms_output.put_line('Total '|| total || ' Students');   
+   marks.extend;
+   marks(marks.count) := 5;
+   marks(3) := 9;
+   
+   FOR i IN 1 .. marks.count LOOP 
+      dbms_output.put_line(marks(i)); 
+   end loop;
+END;
+
+--------------------------------------------------------------------------------
+
+--INDEX-BY TABLE
+DECLARE
+   TYPE salary IS TABLE OF NUMBER INDEX BY VARCHAR2(20); 
+   salary_list salary; 
+   name   VARCHAR2(20); 
+BEGIN
+   salary_list('Angel') := 6200; 
+   salary_list('Georgi') := 7500; 
+   salary_list('Ivan') := 1000; 
+   salary_list('Petar') := 7800;  
+   
+   name := salary_list.FIRST; 
+   WHILE name IS NOT null LOOP 
+
+      dbms_output.put_line 
+      (name);
+      dbms_output.put_line 
+      (salary_list(name));
+      name := salary_list.NEXT(name); 
+   END LOOP; 
+END;
+
+--------------------------------------------------------------------------------
+
+DECLARE
+    l_cust_type customer_type;
+    l_cust_type_empty customer_type;
+BEGIN
+    l_cust_type := customer_type(1, 'Angel', 'Georgiev', '', 'Plovdiv',
+                                '0892456545', 'angel.georgiev', '2000');
+
+    --initializing object
+    l_cust_type_empty := customer_type();
+
+    l_cust_type.first_name := 'Nikola';
+    dbms_output.put_line(l_cust_type.first_name);
+    dbms_output.put_line('Name '||l_cust_type_empty.first_name);
+    dbms_output.put_line('Obj '||l_cust_type.obj_to_clob);
+    dbms_output.put_line(l_cust_type_empty.salary);
+END;
+
+--------------------------------------------------------------------------------
+
+
+DECLARE
+  u user_type := user_type();
+BEGIN
+  u.username := 'angelbgpl4';
+  u.password := 'kontence4';
+  user_pkg.add_user(u);
+END;
+
+
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+select * from users;
+
+

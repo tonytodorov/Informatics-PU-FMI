@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta cgarset = "utf-8">
+<title>JS-Begin</title>
+</head>
+
+<body>
+<u>Текст написан с HTML</u><br>
+<script>
+document.write("<br><b>Текст написан с JavaScript</b></br>")
+</script>
+
+
+</body>
+</html>

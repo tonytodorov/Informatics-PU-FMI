@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+str="HTML & JavaScript";
+i=0;
+function printText()
+{
+document.getElementById("print").innerHTML +=str[i];
+if(++i<str.length) setTimeout("printText()", 140);
+}
+function clearText()
+{
+document.getElementById("print").innerHTML=s.substring(0, --i);
+if(i>0) setTimeout("clearText()", 140);
+}
+
+</script>
+</head>
+
+<body>
+
+<div id = "top">
+<h1 align = "center">HTML & JavaScript</h1>
+</div>
+
+<div id = "content"><p align = "center">
+<span id = "print"></span><br>
+<input type = "button" value = "Посимволно писане" 
+onClick = "document.getElementById('print').innerHTML=''; i=0; printText()">
+<input type="button" value = "Посимволно изтриване" 
+onClick="s=document.getElementById('print').innerText;i=s.length;clearText()">
+</div></p>
+
+<div id = "bottom">
+<p align = "center">Уеб програмиране с <b>HTML & JavaScript</b></p>
+</div>
+
+</body>
+</html> 

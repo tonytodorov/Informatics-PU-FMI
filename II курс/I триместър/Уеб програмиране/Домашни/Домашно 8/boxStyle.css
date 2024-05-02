@@ -1,0 +1,32 @@
+body {
+  margin:50px;
+}
+* {
+  box-sizing: border-box;
+}
+input {
+  display:block;
+  width:45%;
+  margin:10px 0;
+  padding:10px;
+  border-radius:4px;
+  margin:8px 0;
+  outline:none;
+  padding:8px;
+  box-sizing:border-box;
+  transition:.3s;
+}
+
+input:focus{
+    border-color:dodgerBlue;
+    box-shadow:0px 0 10px 0 dodgerBlue;
+}
+
+.type-1 {
+  border-radius:10px;
+  border: 1px solid #eee;
+  transition: .3s border-color;
+}
+.type-1:hover {
+  border: 1px solid #aaa;
+}

@@ -1,0 +1,58 @@
+1. Кои летища можем да посетим от София и които са на 1 дъга разстояние?
+
+MATCH (sofia:Airport {name: 'Sofia Airport'})-[:ROUTE*1..1]->(destination:Airport)
+RETURN destination.name AS Destination
+
+2. А на 2 дъги разстояние?
+
+MATCH (sofia:Airport {name: "Sofia Airport"})-[:ROUTE*2]->(destination:Airport)
+WHERE sofia <> destination
+RETURN DISTINCT destination.name AS Destination;
+
+3. Същото за Пловдив.
+
+MATCH (plovdiv:Airport {name: 'Plovdiv Airport'})-[:ROUTE*1..1]->(destination:Airport)
+RETURN destination.name AS Destination
+
+MATCH (plovdiv:Airport {name: "Plovdiv Airport"})-[:ROUTE*2]->(destination:Airport)
+WHERE plovdiv <> destination
+RETURN DISTINCT destination.name AS Destination;
+
+4. Най-краткият път от Пловдив до Сидни?
+
+MATCH (startAirport:Airport {city: 'Plovdiv Airport'}), (endAirport:Airport {city: 'Sydney Airport'})
+MATCH path = allShortestPaths((startAirport)-[:ROUTE*]-(endAirport))
+RETURN path
+
+5. А най-бързият?
+
+MATCH (startAirport:Airport {city: 'Plovdiv Airport'}), (endAirport:Airport {city: 'Sydney Airport'})
+MATCH path = shortestPath((startAirport)-[:ROUTE*]-(endAirport))
+RETURN path
+
+6. Същото, но за Лондон?
+
+MATCH (startAirport:Airport {city: 'Plovdiv Airport'}), (endAirport:Airport {city: 'London Airport'})
+MATCH path = allShortestPaths((startAirport)-[:ROUTE*]-(endAirport))
+RETURN path
+
+MATCH (startAirport:Airport {city: 'Plovdiv Airport'}), (endAirport:Airport {city: 'London Airport'})
+MATCH path = shortestPath((startAirport)-[:ROUTE*]-(endAirport))
+RETURN path
+
+7.Същото от Монтреал до София?
+
+MATCH (startAirport:Airport {city: 'Montreal Airport'}), (endAirport:Airport {city: 'Sofia Airport'})
+MATCH path = shortestPath((startAirport)-[:ROUTE*]-(endAirport))
+RETURN path
+
+MATCH (startAirport:Airport {city: 'Montreal Airport'}), (endAirport:Airport {city: 'Sofia Airport'})
+MATCH path = shortestPath((startAirport)-[:ROUTE*]-(endAirport))
+RETURN path
+
+8. Най-натовареното летище?
+
+MATCH (airport:Airport)-[route:ROUTE]->()
+RETURN airport.name AS Airport, COUNT(route) AS FlightCount
+ORDER BY FlightCount DESC
+LIMIT 1

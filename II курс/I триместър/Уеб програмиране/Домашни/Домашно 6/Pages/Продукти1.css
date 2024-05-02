@@ -1,0 +1,84 @@
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 350px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.price {
+  color: black;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+
+.ribbon-card-red {
+  width: 85px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: 20px;
+  left: 30px;
+}
+
+.ribbon-red {
+  font: bold 15px Sans-Serif;
+  color: #fff;
+  text-align: center;
+  text-shadow: rgba(255,255,255,0.5) 0px 1px 0px;
+  transform: rotate(45deg);
+  position: relative;
+  padding: 7px 0;
+  left: 317px;
+  top: 65px;
+  width: 115px;
+  background-color: #ea181e;
+  background-image: (linear, left top, left bottom, from(#ea181e), to(#b90005));
+  color: #fff;
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+}
+
+.ribbon-red:before,
+.ribbon-red:after{
+  content: "";
+  border-top: 3px solid #b90005;   
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  position:absolute;
+  bottom: 0px;
+}
+
+
+.ribbon-red:before{
+  left: 0;
+}
+
+.ribbon-red:after{
+  right: 0;
+}

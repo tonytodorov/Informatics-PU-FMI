@@ -1,0 +1,64 @@
+<!DOCTYPE html> 
+<html>
+<!-- http://web.uni-plovdiv.bg/hopteriev -->
+<head> 
+ <meta charset="utf-8">
+ <title>Слайд шоу</title>
+ <style>
+   #div-for-pictures {position:relative; width:640px; height:360px; left:120px; background:#d0d0ff}
+   #div-for-pictures img {position:absolute; width:640px; height:360px; left:0px; top:0px; transform-origin:50% 50%; transform:scale(0)}
+ </style>
+ <script>
+   function showWithScale(kScale)
+   {
+		kScale +=0.025;
+		if (kScale>1)
+		{
+			clearTimeout(tm);
+			myPicture.style.transform="scale(1)";
+			return;
+		}
+		myPicture.style.transform="scale("+kScale+")";
+		tm=setTimeout(function(){showWithScale(kScale)},10);
+   }
+   function hideWithScale(kScale)
+   {
+		kScale -=0.025;
+		if (kScale<0)
+		{
+			clearTimeout(tm);
+			myPicture.style.transform="scale(0)";
+			return;
+		}
+		myPicture.style.transform="scale("+kScale+")";
+		tm=setTimeout(function(){hideWithScale(kScale)},10);
+   }
+   function showPictures()
+   {
+		document.getElementById("forward").disabled=true;
+		myPicture=document.myPic[i];
+		showWithScale(0)
+		if (++i>=document.myPic.length) {document.getElementById("backward").disabled=false; return;}
+		setTimeout("showPictures()", 1300);
+   }
+   function hidePictures()
+   {
+		document.getElementById("backward").disabled=true;
+		myPicture=document.myPic[i];
+		hideWithScale(1)
+		if (--i<0) {document.getElementById("forward").disabled=false; return;}
+		setTimeout("hidePictures()", 1300);
+   }
+ </script>
+</head>
+<body>
+<br><br><br><br>
+  <div id="div-for-pictures">
+	<img src="Pictures/Black-sea-01.jpg" name="myPic">
+	<img src="Pictures/Black-sea-02.jpg" name="myPic">
+	<img src="Pictures/Rodopa-Mountains.jpg" name="myPic">
+  </div><br>
+	<button onClick="i=0; showPictures()" id="forward">Старт слайдшоу (напред)</button>
+	<button onClick="i=document.myPic.length-1; hidePictures()" id="backward" disabled>Старт слайдшоу (назад)</button>
+</body>
+</html>

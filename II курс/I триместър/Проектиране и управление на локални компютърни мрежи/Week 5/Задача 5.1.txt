@@ -1,0 +1,140 @@
+PC1> ip 192.168.44.101/24 192.168.44.1
+Checking for duplicate address...
+PC1 : 192.168.44.101 255.255.255.0 gateway 192.168.44.1
+
+PC1> show ip
+
+NAME        : PC1[1]
+IP/MASK     : 192.168.44.101/24
+GATEWAY     : 192.168.44.1
+DNS         :
+MAC         : 00:50:79:66:68:00
+LPORT       : 10022
+RHOST:PORT  : 127.0.0.1:10023
+MTU:        : 1500
+
+PC1> ping 192.168.44.1
+192.168.44.1 icmp_seq=1 timeout
+84 bytes from 192.168.44.1 icmp_seq=2 ttl=255 time=30.348 ms
+84 bytes from 192.168.44.1 icmp_seq=3 ttl=255 time=30.194 ms
+84 bytes from 192.168.44.1 icmp_seq=4 ttl=255 time=30.190 ms
+84 bytes from 192.168.44.1 icmp_seq=5 ttl=255 time=15.297 ms
+
+PC1> ping 192.168.55.1
+84 bytes from 192.168.55.1 icmp_seq=1 ttl=255 time=30.247 ms
+84 bytes from 192.168.55.1 icmp_seq=2 ttl=255 time=30.389 ms
+84 bytes from 192.168.55.1 icmp_seq=3 ttl=255 time=28.009 ms
+84 bytes from 192.168.55.1 icmp_seq=4 ttl=255 time=14.915 ms
+84 bytes from 192.168.55.1 icmp_seq=5 ttl=255 time=30.076 ms
+
+PC1> ping 192.168.44.103
+84 bytes from 192.168.44.103 icmp_seq=1 ttl=64 time=0.890 ms
+84 bytes from 192.168.44.103 icmp_seq=2 ttl=64 time=1.335 ms
+84 bytes from 192.168.44.103 icmp_seq=3 ttl=64 time=1.232 ms
+84 bytes from 192.168.44.103 icmp_seq=4 ttl=64 time=1.158 ms
+84 bytes from 192.168.44.103 icmp_seq=5 ttl=64 time=2.032 ms
+
+PC1> ping 192.168.55.204
+192.168.55.204 icmp_seq=1 timeout
+192.168.55.204 icmp_seq=2 timeout
+192.168.55.204 icmp_seq=3 timeout
+192.168.55.204 icmp_seq=4 timeout
+192.168.55.204 icmp_seq=5 timeout
+
+PC1> ping 192.168.55.202
+192.168.55.202 icmp_seq=1 timeout
+192.168.55.202 icmp_seq=2 timeout
+192.168.55.202 icmp_seq=3 timeout
+192.168.55.202 icmp_seq=4 timeout
+192.168.55.202 icmp_seq=5 timeout
+
+PC1> ping 192.168.55.202
+192.168.55.202 icmp_seq=1 timeout
+84 bytes from 192.168.55.202 icmp_seq=2 ttl=63 time=30.217 ms
+84 bytes from 192.168.55.202 icmp_seq=3 ttl=63 time=60.208 ms
+84 bytes from 192.168.55.202 icmp_seq=4 ttl=63 time=45.110 ms
+84 bytes from 192.168.55.202 icmp_seq=5 ttl=63 time=45.216 ms
+
+PC1> ping 192.168.55.204
+192.168.55.204 icmp_seq=1 timeout
+84 bytes from 192.168.55.204 icmp_seq=2 ttl=63 time=105.373 ms
+84 bytes from 192.168.55.204 icmp_seq=3 ttl=63 time=45.105 ms
+84 bytes from 192.168.55.204 icmp_seq=4 ttl=63 time=45.269 ms
+84 bytes from 192.168.55.204 icmp_seq=5 ttl=63 time=60.324 ms
+
+PC1>
+—-------------------------------------------------------
+PC2> ip 192.168.55.202/24 192.168.55.1
+Checking for duplicate address...
+PC1 : 192.168.55.202 255.255.255.0 gateway 192.168.55.1
+
+PC2> show ip
+
+NAME        : PC2[1]
+IP/MASK     : 192.168.55.202/24
+GATEWAY     : 192.168.55.1
+DNS         :
+MAC         : 00:50:79:66:68:01
+LPORT       : 10024
+RHOST:PORT  : 127.0.0.1:10025
+MTU:        : 1500
+
+PC2>
+—-------------------------------------
+PC3> ip 192.168.44.103/24 192.168.44.1
+Checking for duplicate address...
+PC1 : 192.168.44.103 255.255.255.0 gateway 192.168.44.1
+
+PC3> show ip
+
+NAME        : PC3[1]
+IP/MASK     : 192.168.44.103/24
+GATEWAY     : 192.168.44.1
+DNS         :
+MAC         : 00:50:79:66:68:02
+LPORT       : 10026
+RHOST:PORT  : 127.0.0.1:10027
+MTU:        : 1500
+
+PC3>
+—-----------------------------
+PC4> ip 192.168.55.204/24 192.168.55.1
+Checking for duplicate address...
+PC1 : 192.168.55.204 255.255.255.0 gateway 192.168.55.1
+
+PC4> show ip
+
+NAME        : PC4[1]
+IP/MASK     : 192.168.55.204/24
+GATEWAY     : 192.168.55.1
+DNS         :
+MAC         : 00:50:79:66:68:03
+LPORT       : 10028
+RHOST:PORT  : 127.0.0.1:10029
+MTU:        : 1500
+
+PC4> ping 192.168.55.202
+84 bytes from 192.168.55.202 icmp_seq=1 ttl=64 time=1.025 ms
+84 bytes from 192.168.55.202 icmp_seq=2 ttl=64 time=1.041 ms
+84 bytes from 192.168.55.202 icmp_seq=3 ttl=64 time=1.100 ms
+84 bytes from 192.168.55.202 icmp_seq=4 ttl=64 time=1.436 ms
+84 bytes from 192.168.55.202 icmp_seq=5 ttl=64 time=1.111 ms
+
+PC4>
+—------------------------------------------
+ESW1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+ESW1(config)#int vlan 100
+ESW1(config-if)#
+*Mar  1 01:22:49.475: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan100, changed state to up
+ESW1(config-if)#ip address 192.168.44.1 255.255.255.0
+ESW1(config-if)#no shut
+ESW1(config-if)#exit
+ESW1(config)#int vlan 200
+ESW1(config-if)#
+*Mar  1 01:24:40.523: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan200, changed state to up
+ESW1(config-if)#ip address 192.168.55.1 255.255.255.0
+ESW1(config-if)#no shut
+ESW1(config-if)#exit
+ESW1(config)#ip routing
+ESW1(config)#

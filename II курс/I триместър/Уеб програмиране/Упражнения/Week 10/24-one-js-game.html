@@ -1,0 +1,57 @@
+﻿<!doctype html>
+<html>
+<!-- http://web.uni-plovdiv.bg/hopteriev -->
+ <head>
+ <meta charset="utf-8">
+ <title>Пъзел</title>
+  <style>
+   div.container{position:relative; border: 1px solid black; background:#aaaaaa; width:402px; height:402px}
+   div.elem{position:absolute; border: 1px solid white; background:#555555; width:98px; height:98px; font-size:85px;text-align:center; cursor:pointer;}
+  </style>
+  <script>
+   function moveEl(myObj)
+    {
+	 if (myObj.style.top==y+"px")
+           if (myObj.style.left==(x+100)+"px")
+             {myObj.style.left=x+"px"; x=x+100;}
+           else
+             {
+				if (myObj.style.left==(x-100)+"px")
+				  {myObj.style.left=x+"px"; x=x-100;}
+			 }
+	 else
+           if (myObj.style.left==x+"px")
+             if (myObj.style.top==(y+100)+"px")
+               {myObj.style.top=y+"px"; y=y+100;}
+             else
+			 if (myObj.style.top==(y-100)+"px")
+               {myObj.style.top=y+"px"; y=y-100;}
+    }
+   function disorder()
+    {
+	  nom=Math.floor(Math.random()*15);
+	  moveEl(document.getElementsByClassName("elem")[nom]);
+	  pnt=setTimeout("disorder()", 1);
+	}   
+  </script>
+ </head>
+ <body>
+  <div class="container">
+   <script>
+    for (i=0; i<15; i++)
+	 {
+	  document.write("<div class='elem' onClick='moveEl(this)' title='Click me'>",i+1,"</div>");
+	  with(document.getElementsByClassName("elem")[i].style)
+	  {
+	   top=(1+((i-i%4)/4)*100)+"px";
+	   left=(1+(i%4)*100)+"px";
+	  }
+	 }
+	 x=(1+(15%4)*100);
+	 y=(1+((15-i%4)/4)*100);
+   </script>
+  </div><br>
+  <input type="button" value="Разбъркване..." onClick="disorder()">
+  <input type="button" value="Стоп" onClick="clearTimeout(pnt)">
+ </body>
+</html>

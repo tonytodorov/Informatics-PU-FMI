@@ -1,0 +1,9 @@
+﻿class Program
+{
+  int Main() {
+    A = scanf();
+	B = A*2;
+	printf(B);
+	return 0;
+  }
+}

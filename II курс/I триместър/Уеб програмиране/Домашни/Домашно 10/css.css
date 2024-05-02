@@ -1,0 +1,106 @@
+#clockContainer {
+    position: relative;
+    margin: auto;
+    height: 40vw;
+    /*to make the height and width responsive*/
+    width: 40vw;
+    background: url(ck.jpg) no-repeat;
+    /*setting our background image*/
+    background-size: 100%;
+	transition:0s;
+	
+	
+	animation-name:animate;
+	animation-direction:alternative-reverse;
+	animation-duration:680s;
+	animation-fill-mode:forwards;
+	animation-iteration-count:infinite;
+	animation-play-state:running;
+	
+	
+}
+@keyframes animate{
+	
+	5%{
+		background-image:url(ck.jpg);
+	}
+	10%{
+		background-image:url(ck1.jpg);
+	}
+	20%{
+		background-image:url(ck2.jpg);
+	}
+	30%{
+		background-image:url(ck3.jpg);
+	}
+	40%{
+		background-image:url(ck4.jpg);
+	}
+	45%{
+		background-image:url(ck5.jpg);
+	}
+	50%{
+		background-image:url(ck6.jpg);
+	}
+	55%{
+		background-image:url(ck7.jpg);
+	}
+	60%{
+		background-image:url(ck8.jpg);
+	}
+	70%{
+		background-image:url(ck9.jpg);
+	}
+	80%{
+		background-image:url(ck10.jpg);
+	}
+	90%{
+		background-image:url(ck11.jpg);
+	}
+	100%{
+		background-image:url(ck12.jpg);
+	}
+}
+
+
+body {
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	background-image: url('https://wallpaperaccess.com/full/1265273.jpg');
+	background-position: 60%;
+}
+  
+  #full {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
+
+  
+#hour,
+#minute
+ {
+    position: absolute;
+    background: black;
+    border-radius: 10px;
+    transform-origin: bottom;
+}
+  
+#hour {
+    width: 1.8%;
+    height: 25%;
+    top: 25%;
+    left: 48.85%;
+    opacity: 0.8;
+}
+  
+#minute {
+    width: 1.6%;
+    height: 30%;
+    top: 19%;
+    left: 48.9%;
+    opacity: 0.8;
+}
+  

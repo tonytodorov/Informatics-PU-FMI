@@ -1,0 +1,162 @@
+  
+using System;
+using System.Drawing;
+
+namespace Draw
+{
+    /// <summary>
+    /// Класът кръг е основен примитив, който е наследник на базовия Shape.
+    /// </summary>
+    [Serializable]
+    public class CircleShape : Shape
+    {
+        #region Constructor
+
+        public CircleShape(RectangleF rect) : base(rect)
+        {
+        }
+
+        public CircleShape(RectangleShape rectangle) : base(rectangle)
+        {
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Проверка за принадлежност на точка point към кръга.
+        /// </summary>
+        public override bool Contains(PointF point)
+        {
+            float radius = Math.Min(Rectangle.Width, Rectangle.Height) / 2;
+            float centerX = Rectangle.X + Rectangle.Width / 2;
+            float centerY = Rectangle.Y + Rectangle.Height / 2;
+
+            float distanceX = Math.Abs(point.X - centerX);
+            float distanceY = Math.Abs(point.Y - centerY);
+
+            if (distanceX > radius || distanceY > radius)
+                return false;
+
+            float distanceSquared = distanceX * distanceX + distanceY * distanceY;
+            return distanceSquared <= radius * radius;
+        }
+
+        /// <summary>
+        /// Частта, визуализираща конкретния примитив.
+        /// </summary>
+        public override void DrawSelf(Graphics grfx)
+        {
+            base.DrawSelf(grfx);
+
+            FillColor = Color.FromArgb(Opacity, FillColor);
+
+            float radius = Math.Min(Rectangle.Width, Rectangle.Height) / 2;
+            float centerX = Rectangle.X + Rectangle.Width / 2;
+            float centerY = Rectangle.Y + Rectangle.Height / 2;
+
+            grfx.FillEllipse(new SolidBrush(FillColor), centerX - radius, centerY - radius, radius * 2, radius * 2);
+            grfx.DrawEllipse(new Pen(StrokeColor, StrokeWidth), centerX - radius, centerY - radius, radius * 2, radius * 2);
+        }
+    }
+}
+
+
+
+
+
+using System;
+using System.Drawing;
+
+namespace Draw
+{
+    /// <summary>
+    /// Класът отсечка е основен примитив, който е наследник на базовия Shape.
+    /// </summary>
+    [Serializable]
+    public class LineShape : Shape
+    {
+        #region Properties
+
+        public PointF StartPoint { get; set; }
+        public PointF EndPoint { get; set; }
+
+        #endregion
+
+        #region Constructor
+
+        public LineShape(PointF startPoint, PointF endPoint)
+        {
+            StartPoint = startPoint;
+            EndPoint = endPoint;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Проверка за принадлежност на точка point към отсечката.
+        /// </summary>
+        public override bool Contains(PointF point)
+        {
+            const float tolerance = 2f;
+
+            float minX = Math.Min(StartPoint.X, EndPoint.X) - tolerance;
+            float maxX = Math.Max(StartPoint.X, EndPoint.X) + tolerance;
+            float minY = Math.Min(StartPoint.Y, EndPoint.Y) - tolerance;
+            float maxY = Math.Max(StartPoint.Y, EndPoint.Y) + tolerance;
+
+            if (point.X < minX || point.X > maxX || point.Y < minY || point.Y > maxY)
+                return false;
+
+            float dx = EndPoint.X - StartPoint.X;
+            float dy = EndPoint.Y - StartPoint.Y;
+            float distance = Math.Abs(dy * point.X - dx * point.Y + EndPoint.X * StartPoint.Y - EndPoint.Y * StartPoint.X) / (float)Math.Sqrt(dx * dx + dy * dy);
+
+            return distance <= tolerance;
+        }
+
+        /// <summary>
+        /// Частта, визуализираща конкретния примитив.
+        /// </summary>
+        public override void DrawSelf(Graphics grfx)
+        {
+            base.DrawSelf(grfx);
+
+            grfx.DrawLine(new Pen(StrokeColor, StrokeWidth), StartPoint, EndPoint);
+        }
+    }
+}
+
+
+
+
+public void AddRandomCircle()
+        {
+            Random rnd = new Random();
+            int x = rnd.Next(100, 1000);
+            int y = rnd.Next(100, 600);
+            int radius = 50; // Радиусът на кръга
+
+            CircleShape circle = new CircleShape(new Rectangle(x, y, 100, 100));
+            circle.FillColor = Color.White;
+            ShapeList.Add(circle);
+
+            // Добавяне на отсечките
+            float centerX = x + radius;
+            float centerY = y + radius;
+
+            // Изчисляваме координатите на точките върху кръга
+            float angle = (float)(Math.PI / 4); // Ъгълът между отсечките (45 градуса)
+            float startPointX = centerX + radius * (float)Math.Cos(angle);
+            float startPointY = centerY + radius * (float)Math.Sin(angle);
+            float endPointX = centerX - radius * (float)Math.Cos(angle);
+            float endPointY = centerY - radius * (float)Math.Sin(angle);
+
+            LineShape line1 = new LineShape(new PointF(startPointX, startPointY), new PointF(endPointX, endPointY));
+            line1.StrokeColor = Color.Black;
+            ShapeList.Add(line1);
+
+            LineShape line2 = new LineShape(new PointF(startPointX, endPointY), new PointF(endPointX, startPointY));
+            line2.StrokeColor = Color.Black;
+            ShapeList.Add(line2);
+
+        }

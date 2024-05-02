@@ -1,0 +1,42 @@
+R1#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#interface f0/0
+R1(config-if)#ip address 192.168.6.1 255.255.255.0
+R1(config-if)#no shutdown
+R1(config-if)#
+*Mar  1 00:17:12.163: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up
+*Mar  1 00:17:13.163: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+R1(config-if)#shut
+R1(config-if)#
+*Mar  1 00:17:47.415: %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to administratively down
+*Mar  1 00:17:48.415: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to down
+R1(config-if)#no shut
+R1(config-if)#
+*Mar  1 00:17:54.887: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up
+*Mar  1 00:17:55.887: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+R1(config-if)#exit
+R1(config)#int f0/0
+R1(config-if)#shut
+R1(config-if)#
+*Mar  1 00:19:30.991: %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to administratively down
+*Mar  1 00:19:31.991: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to down
+R1(config-if)#no shut
+R1(config-if)#
+*Mar  1 00:20:55.879: %LINK-3-UPDOWN: Interface FastEthernet0/0, changed state to up
+*Mar  1 00:20:56.879: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+R1(config-if)#exit
+R1(config)#ip dhcp pool p1
+R1(dhcp-config)#network 192.168.6.0 255.255.255.0
+R1(dhcp-config)#default-router 192.168.6.1
+R1(dhcp-config)#dns-server 192.168.6.1
+R1(dhcp-config)#lease 1 12 59
+R1(dhcp-config)#domain-name test.com
+R1(dhcp-config)#exit
+R1(config)#ip dhcp excluded-address 192.168.6.1 192.168.6.50
+R1(config)#exit
+R1#wr
+*Mar  1 00:39:59.379: %SYS-5-CONFIG_I: Configured from console by console
+R1#write
+Building configuration...
+[OK]
+R1#

@@ -1,0 +1,126 @@
+Началото на рода е неизвестно. От там идва Крум и брат му, който е неизвестен.
+
+Крум има син - Омуртаг, който има 3 деца - Енравота, Звиница и Маламир.
+
+Звиница има дете - Персиан.
+
+Персиан има 3 деца - Борис-Михаил, Докс и Гаврил.
+
+Докс има 1 дете - Тудор.
+
+Борис-Михаил има 6 деца - Владимир Расате, Гаврил, Симеон, Яков, Евираксия и Анна.
+
+Симеон има 6 деца - Михаил, Петър, Иван, Боян и 2 неизвестни.
+
+Петър има 4 деца - Борис II, Роман и 2 неизвестни.
+
+
+% Дефиниции на факти
+male(m-unknown).
+male(krum).
+male(omurtag).
+male(enravota).
+male(zvinitsa).
+male(malamir).
+male(persian).
+male(boris-mixail).
+male(doks).
+male(gavril).
+male(tudor).
+male(vladimir-rasate).
+male(simeon).
+male(qkov).
+male(mihail).
+male(petar).
+male(ivan).
+male(boqn).
+male(boris-ii).
+male(roman).
+
+female(f-unknown).
+female(sestra-na-krum).
+female(evpraksia).
+female(maria).
+female(irina).
+female(anna).
+female(jena-krum).
+female(jena-omurtag).
+female(jena-zvinitsa).
+female(jena-persian).
+female(jena-doks).
+female(jena-simeon).
+
+% Дефиниции на правила
+parent(m-unknown, krum).
+parent(f-unknown, krum).
+parent(m-unknown, sestra-na-krum).
+parent(f-unknown, sestra-na-krum).
+parent(krum, omurtag).
+parent(jena-krum, omurtag).
+parent(omurtag, enravota).
+parent(jena-omurtag, enravota).
+parent(omurtag, zvinitsa).
+parent(jena-omurtag, zvinitsa).
+parent(omurtag, malamir).
+parent(jena-omurtag, malamir).
+parent(zvinitsa, persian).
+parent(jena-zvinitsa, persian).
+parent(persian, boris-mixail).
+parent(jena-persian, boris-mixail).
+parent(persian, doks).
+parent(jena-persian, doks).
+parent(persian, gavril).
+parent(jena-persian, gavril).
+parent(doks, tudor).
+parent(jena-doks, tudor).
+parent(boris-mihail, vladimir-rasate).
+parent(maria, vladimir-rasate).
+parent(boris-mihail, gavril).
+parent(maria, gavril).
+parent(boris-mihail, simeon).
+parent(maria, simeon).
+parent(boris-mihail, qkov).
+parent(maria, qkov).
+parent(boris-mihail, evpraksia).
+parent(maria, evpraksia).
+parent(boris-mihail, anna).
+parent(maria, anna).
+parent(simeon, mihail).
+parent(jena-simeon, mihail).
+parent(simeon, petar).
+parent(jena-simeon, petar).
+parent(simeon, ivan).
+parent(jena-simeon, ivan).
+parent(simeon, boqn).
+parent(jena-simeon, boqn).
+parent(petar, boris-ii).
+parent(irina, boris-ii).
+parent(petar, roman).
+parent(irina, roman).
+
+% Определя майка на Y като X, ако X е родител на Y и X е жена
+mother(X,Y):- parent(X,Y),female(X).
+
+% Определя баща на Y като X, ако X е родител на Y и X е мъж
+father(X,Y):- parent(X,Y),male(X).
+
+% Проверява дали X има поне едно дете
+haschild(X):- parent(X,_).
+
+% Определя брат на X като Y, ако Z е родител на и X и Y, X и Y са мъже и X не е равно на Y
+brother(X,Y):-parent(Z,X),parent(Z,Y),male(X),X\==Y.
+
+% Определя сестра на X като Y, ако Z е родител на и X и Y, X и Y са жени и X не е равно на Y
+sister(X,Y):- parent(Z,X),parent(Z,Y),female(X),X\==Y.
+
+% Определя баба на Z като X, ако X е майка на Y, а Y е родител на Z
+grandmother(X,Z):- mother(X,Y), parent(Y,Z).
+
+% Определя дядо на Z като X, ако X е баща на Y, а Y е родител на Z
+grandfather(X,Z):- father(X,Y), parent(Y,Z).
+
+% Определя жена на X като Y, ако X и Y имат общо дете Z
+wife(X,Y):- parent(X,Z),parent(Y,Z), female(X),male(Y).
+
+% Определя чичо на Z като X, ако X е брат на Y и Y е родител на Z
+uncle(X,Z):- brother(X,Y), parent(Y,Z).

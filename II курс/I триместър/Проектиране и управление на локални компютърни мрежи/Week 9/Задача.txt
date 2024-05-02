@@ -1,0 +1,379 @@
+R1#show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            192.168.1.10    YES NVRAM  up                    up
+Serial0/0                  unassigned      YES NVRAM  administratively down down
+FastEthernet0/1            unassigned      YES NVRAM  administratively down down
+Serial0/1                  unassigned      YES NVRAM  administratively down down
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#router ospf 1
+R1(config-router)#
+*Mar  1 00:01:42.387: %OSPF-4-NORTRID: OSPF process 1 cannot pick a router-id.
+  Please configure manually or bring up an interface with an ip address.
+R1(config-router)#network 192.168.1.0 0.0.0.255 area 1
+R1(config-router)#exit
+R1(config)#exit
+R1#
+*Mar  1 00:04:03.219: %SYS-5-CONFIG_I: Configured from console by console
+R1#wr
+Building configuration...
+[OK]
+R1#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is 192.168.1.12 to network 0.0.0.0
+
+C    192.168.1.0/24 is directly connected, FastEthernet0/0
+O IA 192.168.3.0/24 [110/20] via 192.168.1.12, 00:13:26, FastEthernet0/0
+O*E2 0.0.0.0/0 [110/1] via 192.168.1.12, 00:09:52, FastEthernet0/0
+R1#show ip ospf database
+
+            OSPF Router with ID (192.168.1.10) (Process ID 1)
+
+                Router Link States (Area 1)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+192.168.1.10    192.168.1.10    83          0x80000002 0x00E76E 1
+192.168.1.11    192.168.1.11    1544        0x80000002 0x00E56D 1
+192.168.3.1     192.168.3.1     1513        0x80000003 0x0071EE 1
+
+                Net Link States (Area 1)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.1.11    192.168.1.11    84          0x80000002 0x000CE6
+
+                Summary Net Link States (Area 1)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.3.0     192.168.3.1     1319        0x80000003 0x00EF67
+
+                Summary ASB Link States (Area 1)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.100.5   192.168.3.1     1234        0x80000001 0x00846D
+
+                Type-5 AS External Link States
+
+Link ID         ADV Router      Age         Seq#       Checksum Tag
+0.0.0.0         192.168.100.5   1108        0x80000001 0x00F181 109
+R1#
+-----------------------------------------------------------------------
+R2#show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            192.168.1.11    YES NVRAM  up                    up
+Serial0/0                  unassigned      YES NVRAM  administratively down down
+FastEthernet0/1            unassigned      YES NVRAM  administratively down down
+Serial0/1                  unassigned      YES NVRAM  administratively down down
+R2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#router ospf 202
+R2(config-router)#network 192.168.1.0 0.0.0.255 area 1
+R2(config-router)#exit
+R2(config)#exit
+R2#
+*Mar  1 00:06:46.467: %SYS-5-CONFIG_I: Configured from console by console
+R2#wr
+Building configuration...
+[OK]
+R2#
+*Mar  1 00:10:14.371: %OSPF-5-ADJCHG: Process 202, Nbr 192.168.3.1 on FastEthernet0/0 from LOADING to FULL, Loading Done
+R2#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is 192.168.1.12 to network 0.0.0.0
+
+C    192.168.1.0/24 is directly connected, FastEthernet0/0
+O IA 192.168.3.0/24 [110/20] via 192.168.1.12, 00:18:26, FastEthernet0/0
+O*E2 0.0.0.0/0 [110/1] via 192.168.1.12, 00:14:52, FastEthernet0/0
+
+*Mar  1 00:34:59.811: %OSPF-5-ADJCHG: Process 202, Nbr 0.0.0.0 on FastEthernet0/0 from INIT to DOWN, Neighbor Down: Dead timer expired
+R2#show ip  ospf database
+
+            OSPF Router with ID (192.168.1.11) (Process ID 202)
+
+                Router Link States (Area 1)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+192.168.1.10    192.168.1.10    28          0x80000002 0x00E76E 1
+192.168.1.11    192.168.1.11    1488        0x80000002 0x00E56D 1
+192.168.3.1     192.168.3.1     1458        0x80000003 0x0071EE 1
+
+                Net Link States (Area 1)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.1.11    192.168.1.11    28          0x80000002 0x000CE6
+
+                Summary Net Link States (Area 1)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.3.0     192.168.3.1     1263        0x80000003 0x00EF67
+
+                Summary ASB Link States (Area 1)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.100.5   192.168.3.1     1179        0x80000001 0x00846D
+
+                Type-5 AS External Link States
+
+Link ID         ADV Router      Age         Seq#       Checksum Tag
+0.0.0.0         192.168.100.5   1062        0x80000001 0x00F181 109
+R2#
+---------------------------------------------------------------------------
+R3#show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            192.168.1.12    YES NVRAM  up                    up
+Serial0/0                  unassigned      YES NVRAM  administratively down down
+FastEthernet0/1            192.168.3.1     YES NVRAM  up                    up
+Serial0/1                  unassigned      YES NVRAM  administratively down down
+R3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#router ospf 120
+R3(config-router)#network 192.168.1.0 0.0.0.255 area 1
+R3(config-router)#
+*Mar  1 00:10:14.375: %OSPF-5-ADJCHG: Process 120, Nbr 192.168.1.11 on FastEthernet0/0 from LOADING to FULL, Loading Done
+R3(config-router)#network 192.168.3.0 0.0.0.255 area 0
+R3(config-router)#exit
+R3(config)#exit
+R3#
+*Mar  1 00:12:07.195: %SYS-5-CONFIG_I: Configured from console by console
+R3#wr
+Building configuration...
+[OK]
+R3#
+*Mar  1 00:13:50.787: %OSPF-5-ADJCHG: Process 120, Nbr 192.168.100.5 on FastEthernet0/1 from LOADING to FULL, Loading Done
+R3#
+*Mar  1 00:34:34.895: %OSPF-5-ADJCHG: Process 120, Nbr 192.168.1.10 on FastEthernet0/0 from LOADING to FULL, Loading Done
+R3#
+*Mar  1 00:34:59.715: %OSPF-5-ADJCHG: Process 120, Nbr 0.0.0.0 on FastEthernet0/0 from INIT to DOWN, Neighbor Down: Dead timer expired
+R3#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is 192.168.3.2 to network 0.0.0.0
+
+C    192.168.1.0/24 is directly connected, FastEthernet0/0
+C    192.168.3.0/24 is directly connected, FastEthernet0/1
+O*E2 0.0.0.0/0 [110/1] via 192.168.3.2, 00:00:44, FastEthernet0/1
+R3#show ip ospf database
+
+            OSPF Router with ID (192.168.3.1) (Process ID 120)
+
+                Router Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+192.168.3.1     192.168.3.1     1360        0x80000002 0x00A0D1 1
+192.168.100.5   192.168.100.5   1272        0x80000003 0x00960E 1
+
+                Net Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.3.1     192.168.3.1     1360        0x80000001 0x00DA44
+
+                Summary Net Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.1.0     192.168.3.1     1546        0x80000001 0x000A51
+
+                Router Link States (Area 1)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+192.168.1.10    192.168.1.10    117         0x80000002 0x00E76E 1
+192.168.1.11    192.168.1.11    1577        0x80000002 0x00E56D 1
+192.168.3.1     192.168.3.1     1547        0x80000003 0x0071EE 1
+
+                Net Link States (Area 1)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.1.11    192.168.1.11    120         0x80000002 0x000CE6
+
+                Summary Net Link States (Area 1)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.3.0     192.168.3.1     1357        0x80000003 0x00EF67
+
+                Summary ASB Link States (Area 1)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.100.5   192.168.3.1     1277        0x80000001 0x00846D
+
+                Type-5 AS External Link States
+
+Link ID         ADV Router      Age         Seq#       Checksum Tag
+0.0.0.0         192.168.100.5   1155        0x80000001 0x00F181 109
+R3#
+-------------------------------------------------------------------------
+R5#show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            192.168.3.2     YES NVRAM  up                    up
+Serial0/0                  192.168.100.5   YES NVRAM  up                    up
+FastEthernet0/1            unassigned      YES NVRAM  administratively down down
+Serial0/1                  unassigned      YES NVRAM  administratively down down
+R5#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R5(config)#router ospf 109
+R5(config-router)#network 192.168.3.0 0.0.0.255 area 0
+R5(config-router)#
+*Mar  1 00:13:50.447: %OSPF-5-ADJCHG: Process 109, Nbr 192.168.3.1 on FastEthernet0/0 from LOADING to FULL, Loading Done
+R5(config-router)#default-information originate
+R5(config-router)#exit
+R5(config)#ip route 0.0.0.0 0.0.0.0 192.168.100.6
+R5(config)#exit
+*Mar  1 00:17:44.871: %SYS-5-CONFIG_I: Configured from console by console
+R5#wr
+Building configuration...
+[OK]
+R5#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is 192.168.100.6 to network 0.0.0.0
+
+O IA 192.168.1.0/24 [110/20] via 192.168.3.1, 00:21:38, FastEthernet0/0
+     192.168.100.0/30 is subnetted, 1 subnets
+C       192.168.100.4 is directly connected, Serial0/0
+C    192.168.3.0/24 is directly connected, FastEthernet0/0
+S*   0.0.0.0/0 [1/0] via 192.168.100.6
+R5#show ip ospf database
+
+            OSPF Router with ID (192.168.100.5) (Process ID 109)
+
+                Router Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum Link count
+192.168.3.1     192.168.3.1     1403        0x80000002 0x00A0D1 1
+192.168.100.5   192.168.100.5   1314        0x80000003 0x00960E 1
+
+                Net Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.3.1     192.168.3.1     1404        0x80000001 0x00DA44
+
+                Summary Net Link States (Area 0)
+
+Link ID         ADV Router      Age         Seq#       Checksum
+192.168.1.0     192.168.3.1     1590        0x80000001 0x000A51
+
+                Type-5 AS External Link States
+
+Link ID         ADV Router      Age         Seq#       Checksum Tag
+0.0.0.0         192.168.100.5   1180        0x80000001 0x00F181 109
+R5#
+------------------------------------------------------------------------------
+R6#show ip int brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            unassigned      YES NVRAM  administratively down down
+Serial0/0                  192.168.100.6   YES NVRAM  up                    up
+FastEthernet0/1            unassigned      YES NVRAM  administratively down down
+Serial0/1                  unassigned      YES NVRAM  administratively down down
+R6#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R6(config)#ip route 0.0.0.0 0.0.0.0 192.168.100.5
+R6(config)#exit
+R6#
+*Mar  1 00:21:11.595: %SYS-5-CONFIG_I: Configured from console by console
+R6#wr
+Building configuration...
+[OK]
+R6#show ip route
+Codes: C - connected, S - static, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2
+       ia - IS-IS inter area, * - candidate default, U - per-user static route
+       o - ODR, P - periodic downloaded static route
+
+Gateway of last resort is 192.168.100.5 to network 0.0.0.0
+
+     192.168.100.0/30 is subnetted, 1 subnets
+C       192.168.100.4 is directly connected, Serial0/0
+S*   0.0.0.0/0 [1/0] via 192.168.100.5
+R6#show ip ospf database
+
+R6#
+---------------------------------------------------------------------------------
+PC1> ip 192.168.1.200/24 192.168.1.12
+Checking for duplicate address...
+PC1 : 192.168.1.200 255.255.255.0 gateway 192.168.1.12
+
+PC1> show ip
+
+NAME        : PC1[1]
+IP/MASK     : 192.168.1.200/24
+GATEWAY     : 192.168.1.12
+DNS         :
+MAC         : 00:50:79:66:68:00
+LPORT       : 10030
+RHOST:PORT  : 127.0.0.1:10031
+MTU:        : 1500
+
+PC1> save
+Saving startup configuration to startup.vpc
+.  done
+
+PC1> ping 192.168.3.201
+192.168.3.201 icmp_seq=1 timeout
+192.168.3.201 icmp_seq=2 timeout
+192.168.3.201 icmp_seq=3 timeout
+84 bytes from 192.168.3.201 icmp_seq=4 ttl=62 time=91.398 ms
+84 bytes from 192.168.3.201 icmp_seq=5 ttl=62 time=90.666 ms
+
+PC1> ping 192.168.3.201
+84 bytes from 192.168.3.201 icmp_seq=1 ttl=62 time=76.529 ms
+84 bytes from 192.168.3.201 icmp_seq=2 ttl=62 time=63.693 ms
+84 bytes from 192.168.3.201 icmp_seq=3 ttl=62 time=75.327 ms
+84 bytes from 192.168.3.201 icmp_seq=4 ttl=62 time=75.467 ms
+84 bytes from 192.168.3.201 icmp_seq=5 ttl=62 time=75.327 ms
+
+PC1> ping 192.168.100.6
+84 bytes from 192.168.100.6 icmp_seq=1 ttl=253 time=106.552 ms
+84 bytes from 192.168.100.6 icmp_seq=2 ttl=253 time=91.199 ms
+84 bytes from 192.168.100.6 icmp_seq=3 ttl=253 time=90.581 ms
+84 bytes from 192.168.100.6 icmp_seq=4 ttl=253 time=61.986 ms
+84 bytes from 192.168.100.6 icmp_seq=5 ttl=253 time=93.058 ms
+
+PC1>
+------------------------------------------------------------------
+PC2> ip 192.168.3.201/24 192.168.3.2
+Checking for duplicate address...
+PC1 : 192.168.3.201 255.255.255.0 gateway 192.168.3.2
+
+PC2> show ip
+
+NAME        : PC2[1]
+IP/MASK     : 192.168.3.201/24
+GATEWAY     : 192.168.3.2
+DNS         :
+MAC         : 00:50:79:66:68:01
+LPORT       : 10032
+RHOST:PORT  : 127.0.0.1:10033
+MTU:        : 1500
+
+PC2> save
+Saving startup configuration to startup.vpc
+.  done
+
+PC2>
+------------------------------------------------------------------

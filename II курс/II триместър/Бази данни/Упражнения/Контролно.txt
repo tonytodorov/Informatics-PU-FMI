@@ -1,0 +1,83 @@
+-- 1. Създаване на обектите от схемата. 
+
+	CREATE TABLE TV_CHANNELS 
+	(
+		TV_NO CHAR(3) NOT NULL PRIMARY KEY,
+		NAME VARCHAR(20) NOT NULL
+	)
+
+
+	CREATE TABLE MOVIES 
+	(
+		MOVIE_ID INT NOT NULL PRIMARY KEY,
+		TITLE VARCHAR(30) NOT NULL,
+		GENRE VARCHAR(30) NULL
+	)
+
+	CREATE TABLE DAILY_PROGRAM
+	(
+		TV_NO INT NOT NULL,
+		MOVIE_ID INT NOT NULL
+	)
+
+
+	ALTER TABLE DAILY_PROGRAM
+	ADD CONSTRAINT FK_TV_NO FOREIGN KEY (TV_NO) REFERENCES TV_CHANNELS(TV_NO);
+
+	ALTER TABLE DAILY_PROGRAM
+	ADD CONSTRAINT FK_MOVIE_ID FOREIGN KEY (MOVIE_ID) REFERENCES MOVIES(MOVIE_ID);
+
+
+	-- 2. Добавяне на атрибут RATING за зрителска гледаемост с ограничение на стойностите
+	-- цели числа от 1 до 5 в таблица DAILY_PROGRAM;
+
+
+	ALTER TABLE DAILY_PROGRAM
+	ADD RATING INT NOT NULL
+	CHECK (RATING > 1 AND RATING < 5)
+
+	-- 3. Добавяне по един запис с произволни данни във всяка таблица; (повече)
+
+
+	INSERT INTO TV_CHANNELS(TV_NO, NAME)
+	VALUES(1, 'FOX'),
+	      (2, 'NTV')
+		 
+
+	INSERT INTO MOVIES(MOVIE_ID, TITLE, GENRE)
+	VALUES(100, 'In time', 'action'), 
+	      (101, 'Fast and furious', 'action')
+
+
+	INSERT INTO DAILY_PROGRAM(TV_NO, MOVIE_ID, RATING)
+	VALUES(1, 100, 3), 
+	      (2, 101, 5),
+              (2, 101, 2)
+		
+
+	-- 4. Изтриване на филм с първия въведен от теб идентификатор
+
+	DELETE FROM MOVIES
+	WHERE MOVIE_ID = 1
+
+	DELETE FROM DAILY_PROGRAM
+	WHERE MOVIE_ID = 1
+
+
+	-- 5. Извличане на заглавия на филми, идентификатори на филми и рейтинга им, сортирани
+	-- възходящо по заглавие;
+
+	SELECT M.TITLE, M.MOVIE_ID, RATING
+	FROM MOVIES M JOIN DAILY_PROGRAM DP
+	ON M.MOVIE_ID = DP.MOVIE_ID	
+	ORDER BY M.TITLE ASC
+
+
+	-- 6. Извличане имената на филмите и броя на излъчванията им в дневната програма. В
+	-- резултата да участват и филмите, които все още не са излъчвани;
+
+	SELECT M.TITLE, COUNT(TC.TV_NO)
+	FROM MOVIES M LEFT JOIN TV_CHANNELS TC
+	ON M.MOVIE_ID = TC.TV_NO	
+	GROUP BY M.TITLE, M.MOVIE_ID
+	

@@ -1,0 +1,81 @@
+Задача 1:
+Да се изведе информация за всички възли на базата данни.
+
+MATCH (nodes)
+RETURN nodes
+
+Задача 2:
+Да се изведе информация за студента с факултетен номер 130156004.
+
+MATCH (std:Student) 
+WHERE std.fn = '130156004' 
+RETURN std
+
+Задача 3:
+Да се намерят дисциплините с хорариум над 35 часа.
+
+MATCH (sbj:Subject) 
+WHERE sbj.workload > 35 
+RETURN sbj
+
+Задача 4: 
+Да се намерят дисциплините с хорариум между 35 и 45 часа.
+
+MATCH (sbj:Subject) 
+WHERE sbj.workload > 35 and sbj.workload < 45
+RETURN sbj
+
+Задача 5:
+Да се изведат студентите и дисциплините, които са изучавали.
+
+MATCH Students=()-[:TRAINED_IN]->() 
+RETURN Students
+
+Задача 6:
+Да се изведат всички дисциплини, които е изучавала “Maria“.
+
+MATCH (std:Student 
+WHERE std.name = 'Maria')-[:TRAINED_IN]->(sbj:Subject)
+RETURN sbj
+
+Задача 7:
+Да се изведат имената на всички студенти, които са изучавали “Data Base“.
+
+MATCH (std:Student)-[:TRAINED_IN]->(sbj:Subject 
+WHERE sbj.name = 'Data Base')
+RETURN std.name AS first_name, std.lname AS last_name
+
+Задача 8:
+Да се изтрият студентите с фамилия “Ivanov”.
+
+MATCH (std:Student 
+WHERE std.lname = 'Ivanov') 
+DELETE std
+
+Задача 9:
+Да се изтрие хорариумът на дисциплината “Data Base”.
+
+MATCH (sbj:Subject 
+WHERE sbj.name = 'Data Base') 
+REMOVE sbj.workload
+
+Задача 10:
+Да се изтрие етикета Subject на дисциплината “Data Base”.
+
+MATCH (sbj:Subject 
+WHERE sbj.name = 'Data Base') 
+REMOVE sbj:Subject
+
+Задача 11:
+Да се добави свойство “facultative” за дисциплината “OOP”.
+
+MATCH (sbj:Subject 
+WHERE sbj.name = 'OOP') 
+SET sbj.facultative = ''
+
+Задача 12:
+Да се изведе подробна информация за студентите. Резултатът да е подреден низходящо по фамилия на студент.
+
+MATCH (std:Student) 
+RETURN std 
+ORDER BY std.lname DESC

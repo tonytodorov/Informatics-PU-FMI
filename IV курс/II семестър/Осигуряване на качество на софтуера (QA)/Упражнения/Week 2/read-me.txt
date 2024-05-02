@@ -1,0 +1,17 @@
+0. Проекти
+https://docs.google.com/spreadsheets/d/15ynV_R9ZtmpWATeGFk45Lurl4rtF-Q74ZHMh0bxTqKE/edit#gid=0
+
+1. Довършваме Gantt chart
+https://docs.google.com/document/d/1lsVJLmPWyQ-QyD55_1pw1JqBdX00ygMSlv6oRxKe0jg/edit?usp=sharing
+
+2. Разглеждамe part-01 (oще инструменти за управление на проекти)
+> RACI матрица във FigJam
+> SWOT Table
+> погледни и спецификацията на изисквания
+
+3. Разглеждамe part-02 (видове софтуерно тестване)
+
+4. Тестване на софтуер (видове софтуерно тестване)
+
+5. Тестване:
+https://qase.io (automationс)

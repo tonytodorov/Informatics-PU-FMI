@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+#div1 {
+  width: 120px;
+  height: 10px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+  
+}
+#div2 {
+  width: 100px;
+  height: 10px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+#div3 {
+  width: 100px;
+  height: 10px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+#div4 {
+  width: 100px;
+  height: 10px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+p{
+font-size:30px;
+}
+
+.button {
+  background-color: #4CAF50;
+  border:3px;
+  color: black;
+  border-radius:25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+
+  cursor: pointer;
+
+}
+
+</style>
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+<body>
+
+<p>Попълнете правилно липсващите места в текста</p>
+
+<!--<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div> -->
+<br>
+<div id="drag1"  draggable="true" ondragstart="drag(event)" width="150" height="10"><button class="button">Даниъл Крюгер</button></div>
+<br>
+<div id="drag2"  draggable="true" ondragstart="drag(event)" width="150" height="10"><button class="button">бързи коли</button></div>
+<br>
+<div id="drag3"  draggable="true" ondragstart="drag(event)" width="150" height="10"><button class="button">баща си</button></div>
+<br>
+<div id="drag4"  draggable="true" ondragstart="drag(event)" width="150" height="10"><button class="button">NASCAR</button></div>
+</body>
+</html>
+
+
+<p>“Роден да се състезава” разказва историята на<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div> – непокорен млад уличен състезател за когото е само въпрос на време преди да се сблъска със сериозни неприятности.
+ След като участва в сериозен инцидент по време на незаконно улично състезание той е изпратен от близките си в малък провинциален град където е принуден да живее под един покрив с отчуждения си баща.
+
+Когато разбира, че Националната драгстер асоциация подготвя състезание с <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"></div> в града Дани изявява желание да се включи като участник.
+
+Надеждата му е че благодарение на уменията си зад волана той ще се пребори с местната звезда.
+ Но за да се добере до победата той трябва да се обърне за помощ към <div id="div3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>, който преди години е бил един от най-добрите състезатели в <div id="div4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>.</p>
+

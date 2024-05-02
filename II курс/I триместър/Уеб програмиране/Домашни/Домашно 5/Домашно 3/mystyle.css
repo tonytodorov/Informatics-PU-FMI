@@ -1,0 +1,80 @@
+body{
+    background-image:url('bike wallpaper.jpg');
+    background-repeat:no repeat;
+    background-position:top;
+    margin-top:0px;
+    margin-left:0px;
+    margin-right:0px;
+    font-size:0px;
+    background-size:1300px 800px;
+    font-family:Times New Roman, serif;
+}
+
+h1{
+    font-family:impact;
+    font-size:30px;
+    color:#bb0000;
+    text-align:center;
+}
+
+h2{
+    font-family:impact;
+    font-size:20px;
+    text-align:center;
+}
+
+p{
+    font-family:impact;
+    font-size:20px;
+    color:#bb0000;
+    text-align:center;
+}
+
+a{
+    color:#0000aa;
+    font-size:20px;
+    font-family:arial,verdana,sans-serif;
+    font-weight:bold;
+}
+
+a:link{
+    text-decoration:none;
+}
+
+a:visited{
+    text-decoration:none;
+    color:#0059ff;
+}
+
+a:hover{
+    text-decoration:underline;
+    color:#aa0000;
+}
+
+a:active{
+    text-decoration:none
+    ;color:#77aaCC;
+}
+
+.menu1{
+    height:400px;
+    width:15%;
+    float:left;
+}
+
+.menu2{
+    height:400px;
+    width:15%;
+    float:right;
+}
+
+.content{
+    height:400px;
+    width:70%;
+    float:left;
+}
+
+.footer{
+    clear:both;
+    text-align:center;
+}
