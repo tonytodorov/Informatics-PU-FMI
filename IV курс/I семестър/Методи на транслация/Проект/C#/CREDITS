@@ -1,0 +1,19 @@
+This file lists the most important contributors to the scsc project.
+It is sorted by name. The fields are: name (N), email (E), description (D).
+
+Many Thanks,
+Alexander Penev & Vassil Vassilev.
+
+
+PS: please let us know if you are not on this list while you should be, or
+    if something in your entry is incorrect.
+
+N: Vasil Rangelov
+E: boen.robot@gmail.com
+D: Improvements in the code emitter
+
+N: Martin Vassilev
+E: mrtn.vassilev@gmail.com
+D: scsc test suite
+D: Diagnostics scsc subsystem
+

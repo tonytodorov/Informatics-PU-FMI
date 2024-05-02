@@ -1,0 +1,31 @@
+FilteredAirports.py
+
+import pandas as pd
+
+# Зареждане на данните от файловете
+airports_df = pd.read_csv('D:\\Pandas\\airports.csv')
+
+# Изтриване на редове, в които 'iata' съдържа '\N'
+airports_df = airports_df[airports_df['iata:ID'] != '\\N']
+
+# Записване на промените в нов файл
+airports_df.to_csv('D:\\Pandas\\filteredAirports.csv', index=False)
+
+
+FilteredRoutes.py
+
+import pandas as pd
+
+routes_df = pd.read_csv('D:\\Pandas\\routes.csv')
+
+# Зареждане на файла с филтрираните летища
+filtered_airports_df = pd.read_csv('D:\\Pandas\\filteredAirports.csv')
+
+# Превръщане на 'iata' колоната в списък
+iata_list = filtered_airports_df['iata:ID'].tolist()
+
+# Проверка за съществуване на полетите в таблицата с летищата
+filtered_routes_df = routes_df[routes_df['sourceAirport:START_ID'].isin(iata_list) & routes_df['destinationAirport:END_ID'].isin(iata_list)]
+
+# Записване на промените в нов файл
+filtered_routes_df.to_csv('D:\\Pandas\\filteredRoutes.csv', index=False)

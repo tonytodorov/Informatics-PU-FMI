@@ -1,0 +1,5 @@
+CALL apoc.import.csv(
+  [{fileName: 'file:/filteredAirports.dat', labels: ['Airport']}],
+  [{fileName: 'file:/filteredRoutes.dat', type: 'ROUTE'}],
+  {delimiter: ',', ignoreDuplicateNodes:TRUE}
+)

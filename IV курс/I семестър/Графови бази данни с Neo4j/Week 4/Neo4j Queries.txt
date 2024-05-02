@@ -1,0 +1,135 @@
+GDS plugin
+
+Firm 1:
+
+CREATE  (di1:Firm1{name:"DI1"}),
+	(hr1:Firm1{name:"HR1"}),
+	(en1:Firm1{name:"EN1"}),
+	(se1:Firm1{name:"SE1"}),
+	(di1)-[:KNOW {cost:1}] -> (se1),
+	(di1)-[:KNOW {cost:10}] -> (en1),
+	(di1)-[:KNOW {cost:1}] -> (hr1),
+	(hr1)-[:KNOW {cost:10}] -> (se1),
+	(hr1)-[:KNOW {cost:10}] -> (en1),
+	(se1)-[:KNOW {cost:5}] -> (en1),
+
+	(se1)-[:KNOW {cost:1}] -> (di1),
+	(en1)-[:KNOW {cost:10}] -> (di1),
+	(hr1)-[:KNOW {cost:1}] -> (di1),
+	(se1)-[:KNOW {cost:10}] -> (hr1),
+	(en1)-[:KNOW {cost:10}] -> (hr1),
+	(en1)-[:KNOW {cost:5}] -> (se1)
+
+
+Firm 2:
+
+CREATE  (di2:Firm2{name:"DI2"}),
+	(hr2:Firm2{name:"HR2"}),
+	(en2:Firm2{name:"EN2"}),
+	(se2:Firm2{name:"SE2"}),
+
+	(di2)-[:KNOW {cost:1}] -> (se2),
+	(di2)-[:KNOW {cost:10}] -> (en2),
+	(di2)-[:KNOW {cost:1}] -> (hr2),
+	(hr2)-[:KNOW {cost:10}] -> (se2),
+	(hr2)-[:KNOW {cost:10}] -> (en2),
+	(se2)-[:KNOW {cost:5}] -> (en2),
+
+	(se2)-[:KNOW {cost:1}] -> (di2),
+	(en2)-[:KNOW {cost:10}] -> (di2),
+	(hr2)-[:KNOW {cost:1}] -> (di2),
+	(se2)-[:KNOW {cost:10}] -> (hr2),
+	(en2)-[:KNOW {cost:10}] -> (hr2),
+	(en2)-[:KNOW {cost:5}] -> (se2)
+
+Firm 3:
+
+CREATE  (di3:Firm3{name:"DI3"}),
+	(hr3:Firm3{name:"HR3"}),
+	(en3:Firm3{name:"EN3"}),
+	(se3:Firm3{name:"SE3"}),
+
+	(di3)-[:KNOW {cost:1}] -> (se3),
+	(di3)-[:KNOW {cost:10}] -> (en3),
+	(di3)-[:KNOW {cost:1}] -> (hr3),
+	(hr3)-[:KNOW {cost:10}] -> (se3),
+	(hr3)-[:KNOW {cost:10}] -> (en3),
+	(se3)-[:KNOW {cost:5}] -> (en3),
+
+	(se3)-[:KNOW {cost:1}] -> (di3),
+	(en3)-[:KNOW {cost:10}] -> (di3),
+	(hr3)-[:KNOW {cost:1}] -> (di3),
+	(se3)-[:KNOW {cost:10}] -> (hr3),
+	(en3)-[:KNOW {cost:10}] -> (hr3),
+	(en3)-[:KNOW {cost:5}] -> (se3)
+
+
+Всичко в една заявка:
+
+CREATE  (di1:Firm1{name:"DI1"}),
+	(hr1:Firm1{name:"HR1"}),
+	(en1:Firm1{name:"EN1"}),
+	(se1:Firm1{name:"SE1"}),
+	(di1)-[:KNOW {cost:1}] -> (se1),
+	(di1)-[:KNOW {cost:10}] -> (en1),
+	(di1)-[:KNOW {cost:1}] -> (hr1),
+	(hr1)-[:KNOW {cost:10}] -> (se1),
+	(hr1)-[:KNOW {cost:10}] -> (en1),
+	(se1)-[:KNOW {cost:5}] -> (en1),
+
+	(se1)-[:KNOW {cost:1}] -> (di1),
+	(en1)-[:KNOW {cost:10}] -> (di1),
+	(hr1)-[:KNOW {cost:1}] -> (di1),
+	(se1)-[:KNOW {cost:10}] -> (hr1),
+	(en1)-[:KNOW {cost:10}] -> (hr1),
+	(en1)-[:KNOW {cost:5}] -> (se1),
+	
+	(di2:Firm2{name:"DI2"}),
+	(hr2:Firm2{name:"HR2"}),
+	(en2:Firm2{name:"EN2"}),
+	(se2:Firm2{name:"SE2"}),
+
+	(di2)-[:KNOW {cost:1}] -> (se2),
+	(di2)-[:KNOW {cost:10}] -> (en2),
+	(di2)-[:KNOW {cost:1}] -> (hr2),
+	(hr2)-[:KNOW {cost:10}] -> (se2),
+	(hr2)-[:KNOW {cost:10}] -> (en2),
+	(se2)-[:KNOW {cost:5}] -> (en2),
+
+	(se2)-[:KNOW {cost:1}] -> (di2),
+	(en2)-[:KNOW {cost:10}] -> (di2),
+	(hr2)-[:KNOW {cost:1}] -> (di2),
+	(se2)-[:KNOW {cost:10}] -> (hr2),
+	(en2)-[:KNOW {cost:10}] -> (hr2),
+	(en2)-[:KNOW {cost:5}] -> (se2),
+
+	(di3:Firm3{name:"DI3"}),
+	(hr3:Firm3{name:"HR3"}),
+	(en3:Firm3{name:"EN3"}),
+	(se3:Firm3{name:"SE3"}),
+
+	(di3)-[:KNOW {cost:1}] -> (se3),
+	(di3)-[:KNOW {cost:10}] -> (en3),
+	(di3)-[:KNOW {cost:1}] -> (hr3),
+	(hr3)-[:KNOW {cost:10}] -> (se3),
+	(hr3)-[:KNOW {cost:10}] -> (en3),
+	(se3)-[:KNOW {cost:5}] -> (en3),
+
+	(se3)-[:KNOW {cost:1}] -> (di3),
+	(en3)-[:KNOW {cost:10}] -> (di3),
+	(hr3)-[:KNOW {cost:1}] -> (di3),
+	(se3)-[:KNOW {cost:10}] -> (hr3),
+	(en3)-[:KNOW {cost:10}] -> (hr3),
+	(en3)-[:KNOW {cost:5}] -> (se3),
+
+	(se1)-[:KNOW {cost:1}] -> (se2),
+	(en1)-[:KNOW {cost:10}] -> (en2),
+	(se2)-[:KNOW {cost:10}] -> (se3),
+	(hr2)-[:KNOW {cost:1}] -> (hr3),
+
+	(se2)-[:KNOW {cost:1}] -> (se1),
+	(en2)-[:KNOW {cost:10}] -> (en1),
+	(se3)-[:KNOW {cost:10}] -> (se2),
+	(hr3)-[:KNOW {cost:1}] -> (hr2)
+
+

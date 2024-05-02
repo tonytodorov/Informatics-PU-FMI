@@ -1,0 +1,116 @@
+﻿<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{EEDE3BBA-1814-4D66-9AEE-05EC86514803}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>scsc.Tests</RootNamespace>
+    <AssemblyName>scsc.Tests</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\Vassilev\Application Data\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+  <ItemGroup>
+    <Reference Include="nunit.core">
+      <HintPath>vendors\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core.interfaces">
+      <HintPath>vendors\nunit.core.interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>vendors\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScscTestFixture.cs" />
+    <Compile Include="VerifyDiagnostics.cs" />
+    <None Include="TestCases\EmptyProgram.result" />
+    <None Include="TestCases\EmptyProgram.scs" />
+    <None Include="TestCases\Error-Fibonacci.scs" />
+    <None Include="TestCases\Error-FunctionsStatement-Nested1Level.scs" />
+    <None Include="TestCases\Error-FunctionsStatement-Nested2Levels.scs" />
+    <None Include="TestCases\Error-If-While-SimpleNesting.scs" />
+    <None Include="TestCases\Error-IfStatement-Nested1Level-WithElse.scs" />
+    <None Include="TestCases\Error-IfStatement-Nested1Level.scs" />
+    <None Include="TestCases\Error-IfStatementSimple-WithElse.scs" />
+    <None Include="TestCases\Error-IfStatementSimple.scs" />
+    <None Include="TestCases\Error-UsingClause-MultipleClause.scs" />
+    <None Include="TestCases\Error-UsingClause-SingleClause.scs" />
+    <None Include="TestCases\Error-UsingClause-TwoClause.scs" />
+    <None Include="TestCases\Error-WhileIf-SimpleNesting.scs" />
+    <None Include="TestCases\Error-WhileStatementSimple.scs" />
+    <None Include="TestCases\Error-WritelineStatement.scs" />
+    <None Include="TestCases\Fibonacci.result" />
+    <None Include="TestCases\Fibonacci.scs" />
+    <None Include="TestCases\FunctionsStatement-Nested1Level.result" />
+    <None Include="TestCases\FunctionsStatement-Nested1Level.scs" />
+    <None Include="TestCases\FunctionsStatement-Nested2Levels.result" />
+    <None Include="TestCases\FunctionsStatement-Nested2Levels.scs" />
+    <None Include="TestCases\If-While-SimpleNesting.result" />
+    <None Include="TestCases\If-While-SimpleNesting.scs" />
+    <None Include="TestCases\IfStatement-Nested1Level-WithElse.result" />
+    <None Include="TestCases\IfStatement-Nested1Level-WithElse.scs" />
+    <None Include="TestCases\IfStatement-Nested1Level.result" />
+    <None Include="TestCases\IfStatement-Nested1Level.scs" />
+    <None Include="TestCases\IfStatementSimple-WithElse.result" />
+    <None Include="TestCases\IfStatementSimple-WithElse.scs" />
+    <None Include="TestCases\IfStatementSimple.result" />
+    <None Include="TestCases\IfStatementSimple.scs" />
+    <None Include="TestCases\UsingClause-MultipleClause.scs" />
+    <None Include="TestCases\UsingClause-SingleClause.scs" />
+    <None Include="TestCases\UsingClause-TwoClause.scs">
+    </None>
+    <None Include="TestCases\WhileIf-SimpleNesting.result" />
+    <None Include="TestCases\WhileIf-SimpleNesting.scs" />
+    <None Include="TestCases\WhileStatementSimple.result" />
+    <None Include="TestCases\WhileStatementSimple.scs">
+    </None>
+    <None Include="TestCases\WritelineStatement.result" />
+    <None Include="TestCases\WritelineStatement.scs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharpDevelop\scsc.csproj">
+      <Project>{BBBDC327-6EA3-4178-9A06-0413CAD18DBD}</Project>
+      <Name>scsc</Name>
+    </ProjectReference>
+    <Folder Include="TestCases" />
+  </ItemGroup>
+</Project>

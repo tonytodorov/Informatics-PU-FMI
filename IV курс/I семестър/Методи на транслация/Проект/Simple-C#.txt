@@ -1,0 +1,63 @@
+Азбука
+------
+
+  Letter = 'a'..'z' | 'A'..'Z' | '_'.
+  Digit = '0'..'9'.
+  Space = \t | \n | \r | ' '.
+  Escape = '\'.
+  AnyChar = ' '..\0xff.
+
+Лексеми
+-------
+  
+  Ident = Letter {Letter | Digit | '.'}.
+  Number = Digit {Digit}.
+  Float = Digit {Digit} '.' {Digit}.
+  Boolean = 'false' | 'true'.
+  Char = ''' AnyChar '''.
+  String = '"' {{AnyChar\(Escape|'"')} [Escape('0'|'t'|'n'|'f'|'r'|'"'|'''|Escape)]} '"'.
+  Delimiter = Space | '/*' {AnyChar}\'*/' '*/' | '//' {AnyChar\(\n|\r)}.
+  Keyword = 'class' | 'object' | 'void' | 'null' | 'using' | 'if' | 'else' | 'while' |
+			'return' | 'break' | 'continue' | 'as' | 'is'.
+  SpecialSymbol = ';' | '{' | '}' | ',' | '=' | '*' | '(' | ')' | '[' | ']' |
+                  '=' | '||' | '&&' | '|' | '&' | '^' | '==' | '!=' | '<' | '>' | '<=' | '>=' |
+                  '+' | '-' | '/' | '%' | '++' | '--' | '~' | '!'.
+  OtherSymbol = ...
+
+Граматика
+---------
+[1]  Program = {UsingClause} 'class' Ident '{' {FieldDef | MethodDef} '}'.
+[2]  UsingClause = 'using' Ident ';'.
+[3]  FieldDef = Type (Ident | Ident '[' Number ']' ) ';'.
+[4]  MethodDef = (Type | 'void') Ident '(' [Type Ident {',' Type Ident}] ')' Block.
+[5]  Block = '{' {VarDef | Statement} '}'.
+[6]  VarDef = Type Ident ';'.
+[7]  Type = 'int' | 'bool' | 'double' | 'char' | 'string' | 'object' | Ident.
+[8]  Statement = [Location '='] Expression ';' |
+		'if' '(' Expression ')' Statement ['else' Statement] |
+		'while' '(' Expression ')' Statement |
+		'return' [Expression] ';' |
+		'break' ';' |
+		'continue' ';' |
+		Block.
+[9]  Location = Ident |	Ident '[' Expression ']'.
+[10] Expression = AdditiveExpr [(('<' | '<=' | '==' | '!=' | '>=' | '>') AdditiveExpr) | (('as' | 'is') Type)].
+[11] AdditiveExpr = ['+' | '-'] MultiplicativeExpr {('+' | '-' | '|' | '||' | '^') MultiplicativeExpr}.
+[12] MultiplicativeExpr = SimpleExpr {('*' | '/' | '%' | '&' | '&&') SimpleExpr}.
+[13] SimpleExpr = Location | 
+	   MethodCall | 
+	   Literal | 
+	   '++' Location | 
+	   '--' Location | 
+	   Location '++' | 
+	   Location '--' | 
+	   '~' SimpleExpr | 
+	   '-' SimpleExpr | 
+	   '!' SimpleExpr | 
+	   '(' Expression ')' | 
+	   '(' Type ')' SimpleExpr.
+[14] MethodCall = Ident '(' [Expression {',' Expression}] ')'.
+[15] Literal = Number | Boolean | Float | Char | String | 'null'.
+
+
+
